@@ -1,0 +1,20 @@
+- if user_signed_in?
+  %p
+    Welcome #{current_user.email}
+  = link_to 'Logged In [click to logout]', destroy_user_session_path, :method => :delete
+- else
+  %p You are not signed in.
+  = form_for(resource, :as => resource_name, :url => session_path(:user)) do |f|
+    .row
+      = f.label :email
+      = f.text_field :email
+    .row
+      = f.label :password
+      = f.password_field :password
+    .row
+      = f.check_box :remember_me
+      = f.label :remember_me
+    .row
+      = f.submit 'Sign in'
+    = link_to "Forgot your password?", new_password_path(:user)
+  = link_to 'Sign up', new_user_registration_path
