@@ -1,7 +1,10 @@
 source 'https://rubygems.org'
-
+ruby '2.0.0'
 gem 'rails', '4.0.0'
-gem 'pg'
+gem 'pg', '0.17.0'
+gem 'activerecord-postgresql-adapter', '0.0.1'
+
+gem "thin", ">= 1.5.0"
 
 gem 'sass-rails', '~> 4.0.0'
 gem 'uglifier', '>= 1.3.0'
