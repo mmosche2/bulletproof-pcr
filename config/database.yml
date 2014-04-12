@@ -1,0 +1,19 @@
+common: &common
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: markmoschel
+  password:
+
+development:
+  <<: *common
+  database: bulletproof-pcr_development
+  host: localhost
+
+test:
+  <<: *common
+  database: bulletproof-pcr_test
+
+production:
+  <<: *common
+  database: bulletproof-pcr_production
