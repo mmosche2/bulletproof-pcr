@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  received_date: 2014-04-13 15:53:09
+  user_id: 
+  customer_id: 
+  order_number: MyString
+  immediate_response: MyText
+  adverse_reaction: false
+  summary: MyText
+  correspondence_history: MyText
+
+two:
+  received_date: 2014-04-13 15:53:09
+  user_id: 
+  customer_id: 
+  order_number: MyString
+  immediate_response: MyText
+  adverse_reaction: false
+  summary: MyText
+  correspondence_history: MyText

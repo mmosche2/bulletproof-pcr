@@ -1,0 +1,8 @@
+%h1 All Complaints
+
+- @complaints.each do |complaint|
+  %p= complaint.id
+  %p= complaint.received_date
+  %p= complaint.user.try(:email)
+  %p= complaint.immediate_response
+

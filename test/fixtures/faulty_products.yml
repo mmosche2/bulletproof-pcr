@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  product_id: 
+  complaint_id: 
+  quantity: 1
+  size_count: 1
+  lot: MyString
+  expiration: 2014-04-13 15:54:59
+
+two:
+  product_id: 
+  complaint_id: 
+  quantity: 1
+  size_count: 1
+  lot: MyString
+  expiration: 2014-04-13 15:54:59

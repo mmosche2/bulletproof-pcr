@@ -9,8 +9,10 @@
  * compiled file, but it's generally better to create a new file per style scope.
  *
  *= require bootstrap.min
+ *= require bootstrap_and_overrides
  *= require_self
  *= require_tree .
+ *= require jquery.ui.all
  */
 
 @font-face {
@@ -20,4 +22,8 @@
        url('../assets/glyphicons-halflings-regular.woff') format('woff'),
        url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+form {
+  margin-bottom: 50px;
 }
