@@ -1,0 +1,17 @@
+#dashboard
+  .row
+    .col-xs-10.col-xs-offset-1.text-center
+      %h1 Dashboard
+
+  #complaints-section
+    .row
+      .col-xs-12
+        %h3 Complaints
+        = link_to "+ new complaint", new_complaint_path, class: "btn btn-default"
+    = render 'complaints/complaints_log'
+
+  #returns-section
+    .row
+      .col-xs-12
+        %h3 Returns
+    %p tbd...
