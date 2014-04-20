@@ -17,9 +17,17 @@ class ComplaintsController < ApplicationController
   end
 
   def update
+    @complaint = Complaint.find(params[:id])
+
+    if @complaint.update(complaint_params)
+      redirect_to edit_complaint_path(@complaint)
+    else
+      render 'edit'
+    end
   end
 
   def edit
+    @complaint = Complaint.find(params[:id])
   end
 
   def destroy

@@ -7,9 +7,11 @@
         %th Date Received
         %th Summary
         %th Status
+        %th Actions
       - @complaints.each do |complaint|
         %tr
           %td= complaint.id
           %td= complaint.received_date.strftime("%B %d, %Y")
           %td= complaint.summary
           %td= complaint.status
+          %td= link_to "view", edit_complaint_path(complaint)

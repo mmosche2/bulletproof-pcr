@@ -6,4 +6,11 @@ class WelcomeController < ApplicationController
   def dashboard
     @complaints = Complaint.all
   end
+
+  def account
+    @agents = User.all
+    @product = Product.new
+    @products = Product.all
+  end
+
 end

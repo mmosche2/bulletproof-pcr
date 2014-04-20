@@ -1,0 +1,43 @@
+#account
+  .row
+    .col-xs-10.col-xs-offset-1.text-center
+      %h1 Account
+
+  .row
+    .col-xs-12
+      %ul.nav.nav-tabs
+        %li.active
+          %a{:href => "#products-section", "data-toggle" => "tab"} Products
+        %li
+          %a{:href => "#agents-section", "data-toggle" => "tab"} Agents
+      .tab-content
+        #products-section.tab-pane.active
+          = simple_form_for(@product, html: {class: 'form-horizontal', role: 'form' }) do |f|
+            .row
+              .col-md-3
+                = f.input :sku
+              .col-md-3
+                = f.input :name
+              .col-md-3
+                = f.submit "Add Product", class: "btn btn-primary"
+
+          .row
+            .col-xs-12
+              %table.table
+                %tr
+                  %th SKU
+                  %th Name
+                - @products.each do |product|
+                  %tr
+                    %td= product.sku
+                    %td= product.name
+
+        #agents-section.tab-pane
+          .row
+            .col-xs-12
+              %ul
+                - @agents.each do |agent|
+                  %li= agent.email
+
+
+
