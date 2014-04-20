@@ -30,6 +30,10 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.find(params[:id])
   end
 
+  def show
+    @complaint = Complaint.find(params[:id])
+  end
+
   def destroy
   end
 

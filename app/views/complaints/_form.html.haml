@@ -19,20 +19,27 @@
         = customer_form.input :state, input_html: { class: "col-xs-4" }
         = customer_form.input :zip, input_html: { class: "col-xs-4" }
 
-  .row
-    %hr
+  .row#product-details
     %h2 Product Details
-    = f.simple_fields_for :faulty_products do |product_form|
-      = render 'faulty_product_fields', product_form: product_form
+    %table.table
+      %tr
+        %th Product
+        %th Quantity
+        %th Size Count
+        %th Lot
+        %th Expiration
+        %th Actions
+      = f.simple_fields_for :faulty_products do |product_form|
+        = render 'faulty_product_fields', product_form: product_form
     = link_to_add_fields "Add Another Faulty Product", f, :faulty_products
 
   .row
     %hr
     %h2 Complaint Details
     = f.input :order_number
-    = f.input :immediate_response, input_html: { class: "col-xs-10" }
+    = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 5 }
     = f.input :adverse_reaction, inline_label: "Adverse Reaction?"
-    = f.input :summary, label: "Complaint Summary (short)"
-    = f.input :correspondence_history
+    = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
+    = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }
     .form-actions.col-xs-offset-2
       = f.submit class: "btn btn-primary"

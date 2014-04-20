@@ -1,8 +1,9 @@
-%fieldset.col-xs-12
-  = product_form.association :product, as: :select, include_blank: false, collection: Product.all
-  = product_form.input :quantity, input_html: { class: "col-xs-8" }
-  = product_form.input :size_count, input_html: { class: "col-xs-8" }
-  = product_form.input :lot, input_html: { class: "col-xs-8" }
-  = product_form.input :expiration, as: :string, input_html: { class: "date-picker" }
-  = product_form.hidden_field :_destroy
-  = link_to "remove", '#', class: "col-xs-offset-2 remove_fields"
+%tr
+  %td= product_form.association :product, as: :select, include_blank: false, collection: Product.all, label: false
+  %td= product_form.input :quantity, label: false
+  %td= product_form.input :size_count, label: false
+  %td= product_form.input :lot, label: false
+  %td= product_form.input :expiration, as: :string, input_html: { class: "date-picker" }, label: false
+  %td
+    = product_form.hidden_field :_destroy
+    = link_to "remove", '#', class: "col-xs-offset-2 remove_fields"
