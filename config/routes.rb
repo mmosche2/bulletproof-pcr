@@ -6,6 +6,7 @@ BulletproofPcr::Application.routes.draw do
   get '/account' => 'welcome#account', as: 'account'
 
   resources :complaints
+  resources :adverse_events, only: [:create, :update, :destroy]
   resources :products, only: [:create, :destroy]
 
   root 'welcome#index'

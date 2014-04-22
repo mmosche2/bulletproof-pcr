@@ -24,7 +24,7 @@
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-form {
+form#complaint_form {
   margin-bottom: 50px;
 }
 

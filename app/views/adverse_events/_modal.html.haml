@@ -1,0 +1,68 @@
+#adverse-event-modal.modal.fade{tabindex: "-1", role: "dialog", "aria-labelledby" => "adverse-event-modal", "aria-hidden" => "true"}
+  .modal-dialog.modal-lg
+    .modal-content
+      = simple_form_for AdverseEvent.new, remote: true, validate: true do |f|
+        .modal-header
+          %a.close{"data-dismiss" => "modal"} x
+          %h2 Adverse Event Report
+          %hr
+          %p
+            Complete this form for health-related events and attach to the Product Complaint Report QC-007.01.
+          %p
+            %b NOTE:
+            If customer is currently experiencing an adverse event, have them first obtain appropriate aid (ie: go to the nearest emergency room, contact physician, call poison control) and then call back to report.
+          %p
+            %b NOTE:
+            The agent will advise the customer to
+            %i “discontinue use of this product and all other Bulletproof products that were taken with the product complaint”.
+        .modal-body
+          .row
+            .col-xs-12
+              .row
+                .col-xs-4
+                  = f.input :origination_date, as: :string, input_html: { class: "date-picker" }
+                .col-xs-4
+                  = f.input :complaint_id, label: "PC#", value: @complaint.id
+                .col-xs-4
+                  = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, selected: @complaint.user
+              .row
+                .col-xs-3
+                  = f.input :date_of_event, as: :string, input_html: { class: "date-picker" }, label: "Date of event (mo/day/yr)"
+                .col-xs-3
+                  = f.input :age, label: "Age at Time of Event"
+                .col-xs-3
+                  = f.input :weight, label: "Weight (lbs)"
+                .col-xs-3
+                  = f.input :gender, as: :select, collection: ["female", "male"]
+              = f.input :event_description, label: "Describe event or problem and duration"
+              = f.input :customer_feeling, label: "How are you feeling right now?"
+              .row
+                .col-xs-6
+                  = f.input :attending_health_professional, label: "Name of attending health professional (if applicable)"
+                .col-xs-6
+                  = f.input :hospitalized, label: "Hospitalization required?"
+                  = f.input :hospital_location, label: "If yes, hospital name, city, state"
+              = f.input :relevant_tests, label: "Relevant Tests/Laboratory Data, including dates", input_html: { class: "col-xs-12", :rows => 4 }
+              = f.input :other_relevant_history, label: "Other Relevant History, Including Preexisting Medical Conditions (e.g., allergies, pregnancy, smoking and alcohol use, liver, pancreas, or kidney dysfunction, etc.)", input_html: { class: "col-xs-12", :rows => 4 }
+              .row
+                .col-xs-4
+                  = f.input :frequency, label: "Frequency--how often taken? (e.g. per day, per week, # months)"
+                .col-xs-4
+                  = f.input :usage, label: "Usage--how did you take it? (e.g. w/ water, in orange juice, etc.)"
+                .col-xs-4
+                  = f.input :timing, label: "Timing--when did you take it? (e.g. before meals, with meals, etc.)"
+              .row
+                .col-xs-4
+                  = f.input :therapy_dates, label: "Dates therapy started/stopped (or best estimate)"
+                .col-xs-4
+                  = f.input :abated_after_use_stopped, label: "Event abated after use stopped or dose reduced?"
+                .col-xs-4
+                  = f.input :reappeared_after_reintroduced, label: "Event reappeared after reintroduction?"
+              .row
+                .col-xs-6
+                  = f.input :previous_usage_history, label: "Previous usage history (product, form, brand, quantity)?", input_html: { class: "col-xs-12" }
+                .col-xs-6
+                  = f.input :customer_usage_reason, label: "Why was the customer using this product?", input_html: { class: "col-xs-12" }
+              = f.input :other_therapies, label: "Concomitant medical products, dietary supplements, and therapies--what other medicines, or supplements are you taking? (give start and stop dates) Any therapies or treatments (e.g. chiropractic, acupuncture, chemotherapy)?", input_html: { class: "col-xs-12", :rows => 4 }
+        .modal-footer
+          = f.submit class: "btn btn-primary"
