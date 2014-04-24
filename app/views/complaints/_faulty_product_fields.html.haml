@@ -3,7 +3,7 @@
   %td= product_form.input :quantity, label: false
   %td= product_form.input :size_count, label: false
   %td= product_form.input :lot, label: false
-  %td= product_form.input :expiration, as: :string, input_html: { class: "date-picker" }, label: false
+  %td= product_form.input :expiration, as: :string, input_html: { class: "date-picker", value: format_date(product_form.object.expiration) }, label: false
   %td
     = product_form.hidden_field :_destroy
     = link_to "remove", '#', class: "col-xs-offset-2 remove_fields"

@@ -4,7 +4,7 @@ class AdverseEventsController < ApplicationController
   def create
     @adverse_event = AdverseEvent.new(adverse_event_params)
     if @adverse_event.save
-      redirect_to complaint_path(@adverse_event.complaint)
+      redirect_to edit_complaint_path(@adverse_event.complaint)
     else
       render "new"
     end
@@ -14,7 +14,7 @@ class AdverseEventsController < ApplicationController
     @adverse_event = AdverseEvent.find(params[:id])
 
     if @adverse_event.update(adverse_event_params)
-      redirect_to edit_complaint_path(@adverse_event)
+      redirect_to edit_complaint_path(@adverse_event.complaint)
     else
       render 'edit'
     end

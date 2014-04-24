@@ -9,5 +9,12 @@ BulletproofPcr::Application.routes.draw do
   resources :adverse_events, only: [:create, :update, :destroy]
   resources :products, only: [:create, :destroy]
 
+  devise_scope :user do
+    delete '/logout' => 'devise/sessions#destroy'
+    get '/logout' => 'devise/sessions#destroy'
+    get "/login" => "devise/sessions#new"
+    get '/signup' => 'registrations#new'
+  end
+
   root 'welcome#index'
 end

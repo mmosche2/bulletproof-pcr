@@ -31,3 +31,7 @@ form#complaint_form {
 .tab-content {
   padding: 30px 20px;
 }
+
+a {
+  cursor: pointer;
+}
