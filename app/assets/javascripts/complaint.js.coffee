@@ -2,6 +2,24 @@ setupDatePicker = ->
   $(".date-picker").datepicker
     dateFormat: "MM dd, yy"
 
+
+updateSKU = (product_name, element_to_update) ->
+  $.ajax '/product/get_skus',
+    type: 'GET'
+    dataType: 'json'
+    data: { product_name: product_name }
+    error: (data) ->
+      alert 'Could not process your request. Please try again later.'
+    success: (sku) ->
+      element_to_update.html(sku)
+
+productObserver = ->
+  $('#product-details').on 'change', 'td.product select', (event) ->
+    element_to_update = $(this).closest('tr').find('td.sku')
+    product_name = $(this).find(':selected').text()
+    updateSKU(product_name, element_to_update)
+
+
 ready = ->
   setupDatePicker()
 
@@ -11,12 +29,17 @@ ready = ->
     event.preventDefault()
 
   $('form').on 'click', '.add_fields', (event) ->
-    console.log $(this)
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
     $('#product-details table tr:last').after($(this).data('fields').replace(regexp, time))
     setupDatePicker()
     event.preventDefault()
+
+  productObserver()
+  $('#product-details td.product select').each () ->
+    element_to_update = $(this).closest('tr').find('td.sku')
+    product_name = $(this).find(':selected').text()
+    updateSKU(product_name, element_to_update)
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

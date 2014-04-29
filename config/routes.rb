@@ -4,6 +4,7 @@ BulletproofPcr::Application.routes.draw do
   get 'welcome/index'
   get '/dashboard' => 'welcome#dashboard', as: 'dashboard'
   get '/account' => 'welcome#account', as: 'account'
+  get '/product/get_skus' => 'products#get_skus'
 
   resources :complaints
   resources :adverse_events, only: [:create, :update, :destroy]

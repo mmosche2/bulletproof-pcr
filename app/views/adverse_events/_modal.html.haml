@@ -55,9 +55,9 @@
                 .col-xs-4
                   = f.input :therapy_dates, label: "Dates therapy started/stopped (or best estimate)"
                 .col-xs-4
-                  = f.input :abated_after_use_stopped, label: "Event abated after use stopped or dose reduced?", inline_label: 'Yes'
+                  = f.input :abated_after_use_stopped, label: "Event abated after use stopped or dose reduced?", as: :radio_buttons
                 .col-xs-4
-                  = f.input :reappeared_after_reintroduced, label: "Event reappeared after reintroduction?", inline_label: 'Yes'
+                  = f.input :reappeared_after_reintroduced, label: "Event reappeared after reintroduction?", as: :radio_buttons
               .row
                 .col-xs-6
                   = f.input :previous_usage_history, label: "Previous usage history (product, form, brand, quantity)?", input_html: { class: "col-xs-12" }
