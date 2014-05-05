@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  originating_date: 2014-05-04 22:25:28
+  customer_id: 
+  user_id: 
+  complaint_id: 
+  discard_management_approval_by: 1
+  discard_management_approval_date: 2014-05-04 22:25:28
+  discard_qc_approval_by: 1
+  discard_qc_approval_date: 2014-05-04 22:25:28
+  method_of_disposal: MyString
+  discard_completed_by: 1
+  discard_completed_date: 2014-05-04 22:25:28
+  discard_witnessed_by: 1
+  discard_witnessed_date: 2014-05-04 22:25:28
+
+two:
+  originating_date: 2014-05-04 22:25:28
+  customer_id: 
+  user_id: 
+  complaint_id: 
+  discard_management_approval_by: 1
+  discard_management_approval_date: 2014-05-04 22:25:28
+  discard_qc_approval_by: 1
+  discard_qc_approval_date: 2014-05-04 22:25:28
+  method_of_disposal: MyString
+  discard_completed_by: 1
+  discard_completed_date: 2014-05-04 22:25:28
+  discard_witnessed_by: 1
+  discard_witnessed_date: 2014-05-04 22:25:28

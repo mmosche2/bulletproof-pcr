@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  ROLES = ["Agent", "Warehouse", "Management"]
+
   def to_label
     "#{email}"
   end

@@ -18,7 +18,6 @@ class ComplaintsController < ApplicationController
 
   def update
     @complaint = Complaint.find(params[:id])
-
     if @complaint.update(complaint_params)
       redirect_to edit_complaint_path(@complaint)
     else

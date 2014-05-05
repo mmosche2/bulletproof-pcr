@@ -7,6 +7,7 @@ BulletproofPcr::Application.routes.draw do
   get '/product/get_skus' => 'products#get_skus'
 
   resources :complaints
+  resources :returns
   resources :adverse_events, only: [:create, :update, :destroy]
   resources :products, only: [:create, :destroy]
 

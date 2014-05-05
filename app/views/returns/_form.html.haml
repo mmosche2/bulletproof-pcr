@@ -1,19 +1,13 @@
-= simple_form_for(@complaint, html: {class: 'form-horizontal', id: 'complaint_form', role: 'form' }) do |f|
-  .row
-    .col-xs-12
-      = link_to "Start a Return Report from this Complaint", new_return_path(complaint_id: @complaint.id)
+= simple_form_for(@return, html: {class: 'form-horizontal', id: 'return_form', role: 'form' }) do |f|
   .row
     %hr
     .col-xs-3
-      = f.input :received_date, as: :string, input_html: { class: "date-picker col-xs-8",
-                                                           value: default_received_date }
+      = f.input :originating_date, as: :string, input_html: { class: "date-picker col-xs-8",
+                                                           value: default_return_date }
     .col-xs-3
       = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "col-xs-8" }
     .col-xs-3
-      = f.input :status, collection: Complaint::STATUSES, include_blank: false, input_html: { class: "col-xs-8" }
-    .col-xs-3
-      = f.input :adverse_reaction, inline_label: "Yes", label: "Adverse Reaction?"
-      %a{"data-toggle" => "modal", "data-target" => "#adverse-event-modal"} Adverse Event Report
+      = f.input :complaint_id, label: "PC#", hint: "Start the Return from a Complaint Report to populate this field."
 
   .row
     %hr
@@ -37,10 +31,12 @@
         %tr
           %th Product
           %th SKU
-          %th Quantity
-          %th Size Count
           %th Lot
-          %th Expiration
+          %th Quantity
+          %th Reason for Return
+          %th Credited (in pennies)
+          %th Credit issued date
+          %th Condition
           %th Actions
         = f.simple_fields_for :faulty_products do |product_form|
           = render 'faulty_product_fields', product_form: product_form
@@ -49,13 +45,9 @@
   .row
     %hr
     .col-xs-12
-      %h2 Complaint Details
-      = f.input :order_number
-      = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 5 }
-      = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
-      = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }
+      %h2 Signatures
+      %p tbd...
       .form-actions
         = f.submit class: "btn btn-primary"
 
 
-= render partial: 'adverse_events/modal'

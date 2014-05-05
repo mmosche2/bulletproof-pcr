@@ -7,6 +7,7 @@ class WelcomeController < ApplicationController
 
   def dashboard
     @complaints = Complaint.all
+    @returns = Return.all
   end
 
   def account
