@@ -1,4 +1,4 @@
-wclass AdverseEventsController < ApplicationController
+class AdverseEventsController < ApplicationController
   before_action :authenticate_user!
 
   def create

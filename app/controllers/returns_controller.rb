@@ -47,14 +47,11 @@ class ReturnsController < ApplicationController
       @complaint = complaint_id ? Complaint.find(complaint_id) : nil
       if params[:id]
         @return = Return.find(params[:id])
-        p "params id: #{@return.inspect}"
       elsif @complaint
         @return = @complaint.return || @complaint.build_return(customer: @complaint.customer, user_id: @complaint.user_id)
         @return.faulty_products = @complaint.faulty_products
-        p "complaint: #{@return.inspect}"
       else
         @return = Return.new
-        p "new: #{@return.inspect}"
       end
     end
 
