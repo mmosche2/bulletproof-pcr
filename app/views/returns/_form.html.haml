@@ -42,11 +42,12 @@
           = render 'faulty_product_fields', product_form: product_form
       = link_to_add_fields "Add Another Faulty Product", f, :faulty_products
 
+  .row#signatures
+    = render 'signatures'
+
   .row
     %hr
     .col-xs-12
-      %h2 Signatures
-      %p tbd...
       .form-actions
         = f.submit class: "btn btn-primary"
 

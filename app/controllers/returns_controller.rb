@@ -39,12 +39,26 @@ class ReturnsController < ApplicationController
     @returns = Return.all
   end
 
+  # AJAX only - signs and dates approvals
+  def sign_approval
+    approval = params[:approval]
+    approval_by = "#{approval}_by"
+    approval_date = "#{approval}_date"
+    @return[approval_by] = current_user.id
+    @return[approval_date] = Time.now
+    if @return.save
+      respond_to do |format|
+        format.js {}
+      end
+    end
+  end
+
 
   private
 
     def find_or_new_return
       complaint_id = params[:complaint_id] || (params[:return] && params[:return][:complaint_id])
-      @complaint = complaint_id ? Complaint.find(complaint_id) : nil
+      @complaint = complaint_id.present? ? Complaint.find(complaint_id) : nil
       if params[:id]
         @return = Return.find(params[:id])
       elsif @complaint

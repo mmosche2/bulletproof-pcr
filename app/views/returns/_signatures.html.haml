@@ -1,0 +1,38 @@
+%hr
+.col-xs-12
+  %h2 Signatures
+  - if @return.new_record?
+    %p Signatures will be required after creating the Return record
+  - else
+    %table.table
+      %tr
+        %th Approval
+        %th Signature
+      %tr
+        %td Quality Control Manager Approval to Discard Signature & Date
+        %td
+          - if @return.discard_qc_approval_by
+            = "#{@return.discard_qc_approval.email} on #{@return.discard_qc_approval_date.strftime("%B %d, %Y at %I:%M%P")}"
+          - else
+            = link_to "Sign & Date", "#", id: "discard_qc_approval"
+      %tr
+        %td Management Approval to Discard Signature and Date
+        %td
+          - if @return.discard_management_approval_by
+            = "#{@return.discard_management_approval.email} on #{@return.discard_management_approval_date.strftime("%B %d, %Y at %I:%M%P")}"
+          - else
+            = link_to "Sign & Date", "#", id: "discard_management_approval"
+      %tr
+        %td Discard Completed by Signature and Date
+        %td
+          - if @return.discard_completed_by
+            = "#{@return.discard_completed.email} on #{@return.discard_completed_date.strftime("%B %d, %Y at %I:%M%P")}"
+          - else
+            = link_to "Sign & Date", "#", id: "discard_completed"
+      %tr
+        %td Discard Witnessed by Signature and Date
+        %td
+          - if @return.discard_witnessed_by
+            = "#{@return.discard_witnessed.email} on #{@return.discard_witnessed_date.strftime("%B %d, %Y at %I:%M%P")}"
+          - else
+            = link_to "Sign & Date", "#", id: "discard_witnessed"

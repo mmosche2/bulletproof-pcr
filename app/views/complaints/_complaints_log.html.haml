@@ -5,6 +5,7 @@
       %tr
         %th PC #
         %th Date Received
+        %th Customer
         %th Adverse?
         %th Summary
         %th Status
@@ -13,6 +14,7 @@
         %tr
           %td= complaint.id
           %td= complaint.received_date.strftime("%B %d, %Y")
+          %td= complaint.customer.try(:email)
           %td= complaint.adverse_reaction ? "Yes" : ""
           %td= complaint.summary
           %td= complaint.status

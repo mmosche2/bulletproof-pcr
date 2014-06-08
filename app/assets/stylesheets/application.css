@@ -35,3 +35,4 @@ form#complaint_form, form#return_form {
 a {
   cursor: pointer;
 }
+.hidden{ display: none; }

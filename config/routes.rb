@@ -5,6 +5,7 @@ BulletproofPcr::Application.routes.draw do
   get '/dashboard' => 'welcome#dashboard', as: 'dashboard'
   get '/account' => 'welcome#account', as: 'account'
   get '/product/get_skus' => 'products#get_skus'
+  post '/return/sign_approval' => 'returns#sign_approval'
 
   resources :complaints
   resources :returns
