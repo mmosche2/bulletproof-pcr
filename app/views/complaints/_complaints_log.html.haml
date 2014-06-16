@@ -12,7 +12,7 @@
         %th Actions
       - @complaints.each do |complaint|
         %tr
-          %td= complaint.id
+          %td= complaint.pc_number
           %td= complaint.received_date.strftime("%B %d, %Y")
           %td= complaint.customer.try(:email)
           %td= complaint.adverse_reaction ? "Yes" : ""

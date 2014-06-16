@@ -1,7 +1,10 @@
 = simple_form_for(@complaint, html: {class: 'form-horizontal', id: 'complaint_form', role: 'form' }) do |f|
   .row
     .col-xs-12
-      = link_to "Start a Return Report from this Complaint", new_return_path(complaint_id: @complaint.id)
+      - if @complaint.return.present?
+        = link_to "RA#: #{@complaint.return.ra_number}", edit_return_path(@complaint.return.id)
+      - else
+        = link_to "Start a Return Report from this Complaint", new_return_path(complaint_id: @complaint.id)
   .row
     %hr
     .col-xs-3
@@ -28,7 +31,7 @@
           = customer_form.input :address, input_html: { class: "col-xs-8" }
           = customer_form.input :city, input_html: { class: "col-xs-8" }
           = customer_form.input :state, input_html: { class: "col-xs-4" }
-          = customer_form.input :zip, input_html: { class: "col-xs-4" }
+          = customer_form.input :zip, as: :string, input_html: { class: "col-xs-4" }
 
   .row#product-details
     .col-xs-12
@@ -50,7 +53,9 @@
     %hr
     .col-xs-12
       %h2 Complaint Details
-      = f.input :order_number
+      = f.input :order_number, input_html: { class: "col-xs-2" }
+      = f.input :is_refunded, label: "Agent will document product being refunded?", as: :radio_buttons
+      = f.input :is_returned, label: "Agent will document product being returned?", as: :radio_buttons
       = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 5 }
       = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
       = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }

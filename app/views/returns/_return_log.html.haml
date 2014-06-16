@@ -9,7 +9,7 @@
         %th Actions
       - @returns.each do |record|
         %tr
-          %td= record.id
+          %td= record.ra_number
           %td= record.customer.email if record.customer
           %td= record.status
           %td= link_to "view", edit_return_path(record)

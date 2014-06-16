@@ -13,6 +13,11 @@ class Return < ActiveRecord::Base
   accepts_nested_attributes_for :faulty_products, allow_destroy: true
 
 
+  def ra_number
+    year = Time.now.strftime("%y")
+    return "#{year}-#{id}-R"
+  end
+
   def status
     if !product_condition_entered?
       status = "Pending Warehouse"

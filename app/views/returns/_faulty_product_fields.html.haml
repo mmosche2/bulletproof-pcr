@@ -4,7 +4,7 @@
   %td= product_form.input :lot, label: false
   %td= product_form.input :quantity, label: false
   %td= product_form.input :reason_for_return, label: false
-  %td= product_form.input :credit_amount_in_pennies, label: false
+  %td= product_form.input :credit_amount, label: false
   %td= product_form.input :credit_issued_date, as: :string, input_html: { class: "date-picker", value: format_date(product_form.object.credit_issued_date) }, label: false
   %td= product_form.input :condition, label: false
   %td

@@ -12,10 +12,10 @@ class ProductsController < ApplicationController
 
   # AJAX only - updates skus when product select is changed
   def get_skus
-    product = Product.find_by_name(params[:product_name])
+    product = Product.find_by(name: params[:product_name])
     sku = product.sku if product.present?
     respond_to do |format|
-      format.js { render json: sku }
+      format.js { render json: {sku: sku} }
     end
   end
 

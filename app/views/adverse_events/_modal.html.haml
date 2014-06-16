@@ -24,7 +24,7 @@
                 .col-xs-4
                   = f.input :complaint_id, label: "PC#", value: @complaint.id
                 .col-xs-4
-                  = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, selected: @complaint.user
+                  = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, selected: @complaint.user.try(:id)
               .row
                 .col-xs-3
                   = f.input :date_of_event, as: :string, input_html: { class: "date-picker", value: format_date(f.object.date_of_event) }, label: "Date of event (mo/day/yr)"

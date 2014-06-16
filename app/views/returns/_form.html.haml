@@ -7,7 +7,14 @@
     .col-xs-3
       = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "col-xs-8" }
     .col-xs-3
-      = f.input :complaint_id, label: "PC#", hint: "Start the Return from a Complaint Report to populate this field."
+      = f.input :order_number, input_html: { class: "col-xs-6" }
+    .col-xs-3
+      - if @return.complaint
+        %p.bold Complaint
+        =link_to "#{@return.complaint.pc_number}", edit_complaint_path(@return.complaint)
+        = f.input :complaint_id, as: :hidden, :input_html => { :value => @return.complaint.id }
+      - else
+        = f.input :complaint_id, label: "PC#", hint: "Start the Return from a Complaint Report to populate this field."
 
   .row
     %hr
@@ -22,7 +29,7 @@
           = customer_form.input :address, input_html: { class: "col-xs-8" }
           = customer_form.input :city, input_html: { class: "col-xs-8" }
           = customer_form.input :state, input_html: { class: "col-xs-4" }
-          = customer_form.input :zip, input_html: { class: "col-xs-4" }
+          = customer_form.input :zip, as: :string, input_html: { class: "col-xs-4" }
 
   .row#product-details
     .col-xs-12
@@ -34,7 +41,7 @@
           %th Lot
           %th Quantity
           %th Reason for Return
-          %th Credited (in pennies)
+          %th Credit Amount
           %th Credit issued date
           %th Condition
           %th Actions

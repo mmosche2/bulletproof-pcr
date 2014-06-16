@@ -36,3 +36,4 @@ a {
   cursor: pointer;
 }
 .hidden{ display: none; }
+.bold{ font-weight: 900; }

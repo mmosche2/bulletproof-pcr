@@ -70,10 +70,10 @@ class ReturnsController < ApplicationController
     end
 
     def return_params
-      params.require(:return).permit(:originating_date, :user_id, :customer_id, :complaint_id,
+      params.require(:return).permit(:originating_date, :order_number, :user_id, :customer_id, :complaint_id,
                       customer_attributes: [:id, :name, :email, :phone, :address, :city, :state, :zip],
                       faulty_products_attributes: [:id, :product_id, :quantity, :size_count, :lot, :expiration,
-                                            :returned, :reason_for_return, :credit_amount_in_pennies,
+                                            :returned, :reason_for_return, :credit_amount,
                                             :credit_issued_date, :return_auth_num, :condition, :quarantined,
                                             :quarantined_area_by, :quarantined_area_date, :quarantined_sticker_by,
                                             :quarantined_sticker_date, :_destroy])

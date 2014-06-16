@@ -10,8 +10,8 @@ updateSKU = (product_name, element_to_update) ->
     data: { product_name: product_name }
     error: (data) ->
       alert 'Could not process your request. Please try again later.'
-    success: (sku) ->
-      element_to_update.html(sku)
+    success: (data) ->
+      element_to_update.html(data.sku)
 
 productObserver = ->
   $('#product-details').on 'change', 'td.product select', (event) ->
@@ -33,6 +33,9 @@ ready = ->
     regexp = new RegExp($(this).data('id'), 'g')
     $('#product-details table tr:last').after($(this).data('fields').replace(regexp, time))
     setupDatePicker()
+    element_to_update = $('#product-details tr:last').find('td.sku')
+    product_name = $('#product-details tr:last').find(':selected').text()
+    updateSKU(product_name, element_to_update)
     event.preventDefault()
 
   productObserver()

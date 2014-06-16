@@ -10,4 +10,9 @@ class Complaint < ActiveRecord::Base
 
   STATUSES = ["open", "closed"]
 
+  def pc_number
+    year = Time.now.strftime("%y")
+    return "#{year}-#{id}-PC"
+  end
+
 end
