@@ -16,60 +16,74 @@
       = f.input :status, collection: Complaint::STATUSES, include_blank: false, input_html: { class: "col-xs-8" }
     .col-xs-2
       = f.input :adverse_reaction, inline_label: "Yes", label: "Adverse Reaction?", as: :radio_buttons
-      %a{"data-toggle" => "modal", "data-target" => "#adverse-event-modal"} Adverse Event Report
     .col-xs-2
       %p NOTE: An adverse reaction is any unintended physical response to a product - this includes, but is not limited to stomach ache, dizziness, itching, increased heart rate, diarrhea, headache, or nausea.
 
   .row
     %hr
     .col-xs-12
-      %h2 Customer Information
-      = f.simple_fields_for :customer do |customer_form|
-        .col-xs-6
-          = customer_form.input :name, input_html: { class: "col-xs-8" }
-          = customer_form.input :email, input_html: { class: "col-xs-8" }
-          = customer_form.input :phone, input_html: { class: "col-xs-8" }
-        .col-xs-6
-          = customer_form.input :address, input_html: { class: "col-xs-8" }
-          = customer_form.input :city, input_html: { class: "col-xs-8" }
-          = customer_form.input :state, input_html: { class: "col-xs-4" }
-          = customer_form.input :zip, as: :string, input_html: { class: "col-xs-4" }
+      .section-header
+        %h2
+          %span.toggle-sign -
+          Customer Information
+      .section-content
+        = f.simple_fields_for :customer do |customer_form|
+          .col-xs-6
+            = customer_form.input :name, input_html: { class: "col-xs-8" }
+            = customer_form.input :email, input_html: { class: "col-xs-8" }
+            = customer_form.input :phone, input_html: { class: "col-xs-8" }
+          .col-xs-6
+            = customer_form.input :address, input_html: { class: "col-xs-8" }
+            = customer_form.input :city, input_html: { class: "col-xs-8" }
+            = customer_form.input :state, input_html: { class: "col-xs-4" }
+            = customer_form.input :zip, as: :string, input_html: { class: "col-xs-4" }
 
   .row#product-details
     .col-xs-12
-      %h2 Product Details
-      %table.table
-        %tr
-          %th Product
-          %th UPC code/SKU
-          %th Quantity reported (bottles/bags)
-          %th Size type (oz or count)
-          %th Lot
-          %th Expiration
-          %th Actions
-        = f.simple_fields_for :faulty_products do |product_form|
-          = render 'faulty_product_fields', product_form: product_form
-      = link_to_add_fields "Add Another Faulty Product", f, :faulty_products
+      .section-header
+        %h2
+          %span.toggle-sign -
+          Product Details
+      .section-content
+        %table.table
+          %tr
+            %th Product
+            %th UPC code/SKU
+            %th Quantity reported (bottles/bags)
+            %th Size type (oz or count)
+            %th Lot
+            %th Expiration
+            %th Actions
+          = f.simple_fields_for :faulty_products do |product_form|
+            = render 'faulty_product_fields', product_form: product_form
+        = link_to_add_fields "Add Another Faulty Product", f, :faulty_products
 
   .row
-    %hr
     .col-xs-12
-      %h2 Complaint Details
-      = f.input :order_number, label: "Purchase Order Number", input_html: { class: "col-xs-2" }
-      = f.input :is_refunded, label: "Agent will document product being refunded?", as: :radio_buttons
-      = f.input :refund_amount, label: "... if yes, how much?", input_html: { class: "col-xs-1" }
-      = f.input :is_returned, label: "Agent will document product being returned?", as: :radio_buttons
-      = f.input :return_quantity, label: "... if yes, what's the total quantity?", input_html: { class: "col-xs-1" }
-      = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 10}
-      = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
-      = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }
+      .section-header
+        %h2
+          %span.toggle-sign -
+          Complaint Details
+      .section-content
+        = f.input :order_number, label: "Purchase Order Number", input_html: { class: "col-xs-2" }
+        = f.input :is_refunded, label: "Agent will document product being refunded?", as: :radio_buttons
+        = f.input :refund_amount, label: "... if yes, how much?", input_html: { class: "col-xs-1" }
+        = f.input :is_returned, label: "Agent will document product being returned?", as: :radio_buttons
+        = f.input :return_quantity, label: "... if yes, what's the total quantity?", input_html: { class: "col-xs-1" }
+        = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 10}
+        = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
+        = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }
+
+  .row
+    %br
+    %br
+    .col-xs-12
       .form-actions
         = f.submit class: "btn btn-primary"
 
-%hr
-
 .row#adverse-event-form
-  .col-xs-10.col-xs-offset-1
+  %hr
+  .col-xs-10
     = render partial: 'adverse_events/form'
 
 

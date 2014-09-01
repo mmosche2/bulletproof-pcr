@@ -1,6 +1,9 @@
 = simple_form_for edit_or_new_adverse_event, validate: true do |f|
-  .form-header
-    %h2 Adverse Event Report
+  .section-header
+    %h2
+      %span.toggle-sign -
+      Adverse Event Report
+  .section-content
     %hr
     %p
       Complete this form for health-related events.
@@ -11,7 +14,6 @@
       %b NOTE:
       The agent will advise the customer to
       %i “discontinue use of this product and all other Bulletproof products that were taken with the product complaint”.
-  .form-body
     .row
       .col-xs-12
         .row
@@ -60,28 +62,33 @@
           .col-xs-6
             = f.input :customer_usage_reason, label: "Why was the customer using this product?", input_html: { class: "col-xs-12" }
         = f.input :other_therapies, label: "Concomitant medical products, dietary supplements, and therapies--what other medicines, or supplements are you taking? (give start and stop dates) Any therapies or treatments (e.g. chiropractic, acupuncture, chemotherapy)?", input_html: { class: "col-xs-12", :rows => 4 }
-  .form-footer
-    = f.submit class: "btn btn-primary"
+    .row.form-footer
+      .col-xs-3
+        = f.submit class: "btn btn-primary"
 
 
 .row#contact-attempts
   .col-xs-12
-    %h2 Contact Attempts
-    - @complaint.adverse_event.try(:contact_attempts).each_with_index do |attempt, index|
-      %h4
-        = "Attempt ##{index+1}"
-        = link_to "edit", edit_contact_attempt_path(attempt)
-      %p.date-and-name= "#{attempt.created_at.strftime("%B %d, %Y at %I:%M%P")} by #{name_or_email(attempt.user)}"
-      %p.note-text= attempt.note
+    .section-header
+      %h2
+        %span.toggle-sign -
+        Contact Attempts
+    .section-content
+      - @complaint.adverse_event.try(:contact_attempts).each_with_index do |attempt, index|
+        %h4
+          = "Attempt ##{index+1}"
+          = link_to "edit", edit_contact_attempt_path(attempt)
+        %p.date-and-name= "#{attempt.created_at.strftime("%B %d, %Y at %I:%M%P")} by #{name_or_email(attempt.user)}"
+        %p.note-text= attempt.note
 
-    %h4 Next Attempt
-    = simple_form_for @complaint.adverse_event.contact_attempts.build, validate: true do |f|
-      = f.input :note, label: false
-      = f.input :adverse_event_id, as: :hidden, :input_html => { :value => @complaint.adverse_event.try(:id) }
-      = f.input :user_id, as: :hidden, :input_html => { :value => @complaint.user.try(:id) }
-      .row
-        .col-xs-3
-          = f.submit "Add Contact Attempt", class: "btn btn-primary"
+      %h4 Next Attempt
+      = simple_form_for @complaint.adverse_event.contact_attempts.build, validate: true do |f|
+        = f.input :note, label: false
+        = f.input :adverse_event_id, as: :hidden, :input_html => { :value => @complaint.adverse_event.try(:id) }
+        = f.input :user_id, as: :hidden, :input_html => { :value => @complaint.user.try(:id) }
+        .row
+          .col-xs-3
+            = f.submit "Add Contact Attempt", class: "btn btn-primary"
 
 
 

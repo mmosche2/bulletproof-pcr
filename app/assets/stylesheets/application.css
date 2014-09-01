@@ -24,8 +24,8 @@
        url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 
-form#complaint_form, form#return_form {
-  margin-bottom: 50px;
+body {
+  padding-bottom: 100px;
 }
 
 .tab-content {
@@ -47,4 +47,11 @@ a {
   line-height: 12px;
 }
 
+.section-header {
+  cursor: pointer;
+}
+
+.section-content {
+  margin-left: 20px;
+}
 
