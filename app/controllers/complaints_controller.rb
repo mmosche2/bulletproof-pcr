@@ -46,7 +46,7 @@ class ComplaintsController < ApplicationController
   private
 
     def complaint_params
-      params.require(:complaint).permit(:received_date, :user_id, :customer_id, :status, :order_number, :is_returned, :is_refunded, :immediate_response, :adverse_reaction, :summary, :correspondence_history, customer_attributes: [:id, :name, :email, :phone, :address, :city, :state, :zip], faulty_products_attributes: [:id, :product_id, :quantity, :size_count, :lot, :expiration, :_destroy])
+      params.require(:complaint).permit(:received_date, :user_id, :customer_id, :status, :order_number, :is_returned, :is_refunded, :refund_amount, :return_quantity, :immediate_response, :adverse_reaction, :summary, :correspondence_history, customer_attributes: [:id, :name, :email, :phone, :address, :city, :state, :zip], faulty_products_attributes: [:id, :product_id, :quantity_reported, :size_count, :lot, :expiration, :_destroy])
     end
 
 end

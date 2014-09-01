@@ -2,7 +2,8 @@
   %td.product= product_form.association :product, as: :select, include_blank: false, collection: Product.all, label: false
   %td.sku
   %td= product_form.input :lot, label: false
-  %td= product_form.input :quantity, label: false
+  %td= product_form.input :quantity_reported, label: false
+  %td= product_form.input :quantity_received, label: false
   %td= product_form.input :reason_for_return, label: false
   %td= product_form.input :credit_amount, label: false
   %td= product_form.input :credit_issued_date, as: :string, input_html: { class: "date-picker", value: format_date(product_form.object.credit_issued_date) }, label: false

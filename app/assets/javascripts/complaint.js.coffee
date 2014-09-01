@@ -22,8 +22,10 @@ productObserver = ->
 updateAdverseReactionMessageInImmediateResponse = ->
   if $('#complaint_adverse_reaction_false').is(':checked')
     $("#complaint_immediate_response").html(NAR_MESSAGE)
+    $("#adverse-event-form").hide()
   else if $('#complaint_adverse_reaction_true').is(':checked')
     $("#complaint_immediate_response").html(AR_MESSAGE)
+    $("#adverse-event-form").show()
 
 adverseReactionObserver = ->
   $('.complaint_adverse_reaction').on 'change', 'input.radio_buttons', (event) ->

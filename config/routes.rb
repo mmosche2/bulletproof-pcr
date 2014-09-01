@@ -10,6 +10,7 @@ BulletproofPcr::Application.routes.draw do
   resources :complaints
   resources :returns
   resources :adverse_events, only: [:create, :update, :destroy]
+  resources :contact_attempts, only: [:create, :update, :destroy, :edit]
   resources :products, only: [:create, :destroy]
 
   devise_scope :user do

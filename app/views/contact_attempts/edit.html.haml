@@ -1,0 +1,7 @@
+%h2 Update Contact Attempt
+= simple_form_for @contact_attempt, validate: true do |f|
+  = f.input :note, label: false
+  = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "" }
+  .row
+    .col-xs-3
+      = f.submit "Update", class: "btn btn-primary"

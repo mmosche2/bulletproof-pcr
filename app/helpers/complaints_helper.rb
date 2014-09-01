@@ -12,4 +12,8 @@ module ComplaintsHelper
     @complaint.adverse_event || @complaint.build_adverse_event
   end
 
+  def name_or_email(user)
+    user.name.present? ? user.name : user.email
+  end
+
 end

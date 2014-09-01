@@ -1,4 +1,4 @@
-#adverse-event-modal {
+#adverse-event-form {
   input, textarea {
     width: 100%;
     margin-bottom: 40px;
@@ -12,6 +12,9 @@
     margin-bottom: 0px;
   }
   #adverse_event_other_therapies {
-    margin-bottom: 0px;
+    margin-bottom: 20px;
+  }
+  .form-footer {
+    margin-bottom: 50px;
   }
 }

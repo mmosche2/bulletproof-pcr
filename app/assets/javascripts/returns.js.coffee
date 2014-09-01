@@ -18,11 +18,11 @@ updateConditionAlert = ->
     $('.condition-instruction').text("")
 
 returnTypeObserver = ->
-  $('.return_type').on 'change', 'select', (event) ->
+  $('.return_return_type').on 'change', 'select', (event) ->
     updateCondition()
 
 updateCondition = ->
-  type = $('.return_type select').find(':selected').text()
+  type = $('.return_return_type select').find(':selected').text()
   if type == "Customer complaint"
     selectCondition("bad")
   else if type == "Return to sender"
@@ -39,11 +39,11 @@ selectCondition = (condition) ->
 
 
 ready = ->
-  conditionObserver()
-  updateConditionAlert()
-
   returnTypeObserver()
   updateCondition()
+
+  conditionObserver()
+  updateConditionAlert()
 
   $("#signatures").on "click", "a", (event) ->
     event.preventDefault()

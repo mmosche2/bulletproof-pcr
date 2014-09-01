@@ -42,7 +42,7 @@
         %tr
           %th Product
           %th UPC code/SKU
-          %th Quantity
+          %th Quantity reported (bottles/bags)
           %th Size type (oz or count)
           %th Lot
           %th Expiration
@@ -57,12 +57,19 @@
       %h2 Complaint Details
       = f.input :order_number, label: "Purchase Order Number", input_html: { class: "col-xs-2" }
       = f.input :is_refunded, label: "Agent will document product being refunded?", as: :radio_buttons
+      = f.input :refund_amount, label: "... if yes, how much?", input_html: { class: "col-xs-1" }
       = f.input :is_returned, label: "Agent will document product being returned?", as: :radio_buttons
+      = f.input :return_quantity, label: "... if yes, what's the total quantity?", input_html: { class: "col-xs-1" }
       = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 10}
       = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
       = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }
       .form-actions
         = f.submit class: "btn btn-primary"
 
+%hr
 
-= render partial: 'adverse_events/modal'
+.row#adverse-event-form
+  .col-xs-10.col-xs-offset-1
+    = render partial: 'adverse_events/form'
+
+

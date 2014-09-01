@@ -1,0 +1,87 @@
+= simple_form_for edit_or_new_adverse_event, validate: true do |f|
+  .form-header
+    %h2 Adverse Event Report
+    %hr
+    %p
+      Complete this form for health-related events.
+    %p
+      %b NOTE:
+      If customer is currently experiencing an adverse event, have them first obtain appropriate aid (ie: go to the nearest emergency room, contact physician, call poison control) and then call back to report.
+    %p
+      %b NOTE:
+      The agent will advise the customer to
+      %i “discontinue use of this product and all other Bulletproof products that were taken with the product complaint”.
+  .form-body
+    .row
+      .col-xs-12
+        .row
+          .col-xs-4
+            = f.input :origination_date, as: :string, input_html: { class: "date-picker", value: format_date(f.object.origination_date) }
+          .col-xs-4
+            = f.input :complaint_id, label: "PC#", value: @complaint.id
+          .col-xs-4
+            = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, selected: @complaint.user.try(:id)
+        .row
+          .col-xs-3
+            = f.input :date_of_event, as: :string, input_html: { class: "date-picker", value: format_date(f.object.date_of_event) }, label: "Date of event (mo/day/yr)"
+          .col-xs-3
+            = f.input :age, label: "Age at Time of Event"
+          .col-xs-3
+            = f.input :weight, label: "Weight (lbs)"
+          .col-xs-3
+            = f.input :gender, as: :select, collection: ["female", "male"]
+        = f.input :event_description, label: "Describe event or problem and duration"
+        = f.input :customer_feeling, label: "How are you feeling right now?"
+        .row
+          .col-xs-3
+            = f.input :hospitalized, as: :boolean, inline_label: 'Hospitalization required', label: false
+          .col-xs-6
+            = f.input :attending_health_professional, label: "Name of attending health professional (if applicable)"
+            = f.input :hospital_location, label: "Hospital name, city, state"
+        = f.input :relevant_tests, label: "Relevant Tests/Laboratory Data, including dates", input_html: { class: "col-xs-12", :rows => 4 }
+        = f.input :other_relevant_history, label: "Other Relevant History, Including Preexisting Medical Conditions (e.g., allergies, pregnancy, smoking and alcohol use, liver, pancreas, or kidney dysfunction, etc.)", input_html: { class: "col-xs-12", :rows => 4 }
+        .row
+          .col-xs-4
+            = f.input :frequency, label: "Frequency--how often taken? (e.g. per day, per week, # months)"
+          .col-xs-4
+            = f.input :usage, label: "Usage--how did you take it? (e.g. w/ water, in orange juice, etc.)"
+          .col-xs-4
+            = f.input :timing, label: "Timing--when did you take it? (e.g. before meals, with meals, etc.)"
+        .row
+          .col-xs-4
+            = f.input :therapy_dates, label: "Dates therapy started/stopped (or best estimate)"
+          .col-xs-4
+            = f.input :abated_after_use_stopped, label: "Event abated after use stopped or dose reduced?", as: :radio_buttons
+          .col-xs-4
+            = f.input :reappeared_after_reintroduced, label: "Event reappeared after reintroduction?", as: :radio_buttons
+        .row
+          .col-xs-6
+            = f.input :previous_usage_history, label: "Previous usage history (product, form, brand, quantity)?", input_html: { class: "col-xs-12" }
+          .col-xs-6
+            = f.input :customer_usage_reason, label: "Why was the customer using this product?", input_html: { class: "col-xs-12" }
+        = f.input :other_therapies, label: "Concomitant medical products, dietary supplements, and therapies--what other medicines, or supplements are you taking? (give start and stop dates) Any therapies or treatments (e.g. chiropractic, acupuncture, chemotherapy)?", input_html: { class: "col-xs-12", :rows => 4 }
+  .form-footer
+    = f.submit class: "btn btn-primary"
+
+
+.row#contact-attempts
+  .col-xs-12
+    %h2 Contact Attempts
+    - @complaint.adverse_event.try(:contact_attempts).each_with_index do |attempt, index|
+      %h4
+        = "Attempt ##{index+1}"
+        = link_to "edit", edit_contact_attempt_path(attempt)
+      %p.date-and-name= "#{attempt.created_at.strftime("%B %d, %Y at %I:%M%P")} by #{name_or_email(attempt.user)}"
+      %p.note-text= attempt.note
+
+    %h4 Next Attempt
+    = simple_form_for @complaint.adverse_event.contact_attempts.build, validate: true do |f|
+      = f.input :note, label: false
+      = f.input :adverse_event_id, as: :hidden, :input_html => { :value => @complaint.adverse_event.try(:id) }
+      = f.input :user_id, as: :hidden, :input_html => { :value => @complaint.user.try(:id) }
+      .row
+        .col-xs-3
+          = f.submit "Add Contact Attempt", class: "btn btn-primary"
+
+
+

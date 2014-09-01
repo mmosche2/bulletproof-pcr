@@ -1,7 +1,7 @@
 %tr
   %td.product= product_form.association :product, as: :select, include_blank: false, collection: Product.all, label: false
   %td.sku
-  %td= product_form.input :quantity, label: false
+  %td= product_form.input :quantity_reported, label: false
   %td= product_form.input :size_count, label: false
   %td= product_form.input :lot, label: false
   %td= product_form.input :expiration, as: :string, input_html: { class: "date-picker", value: format_date(product_form.object.expiration) }, label: false
