@@ -7,16 +7,18 @@
         = link_to "Start a Return Report from this Complaint", new_return_path(complaint_id: @complaint.id)
   .row
     %hr
-    .col-xs-3
-      = f.input :received_date, as: :string, input_html: { class: "date-picker col-xs-8",
+    .col-xs-2
+      = f.input :received_date, as: :string, input_html: { class: "date-picker",
                                                            value: default_received_date }
     .col-xs-3
-      = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "col-xs-8" }
-    .col-xs-3
+      = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "" }
+    .col-xs-2
       = f.input :status, collection: Complaint::STATUSES, include_blank: false, input_html: { class: "col-xs-8" }
-    .col-xs-3
+    .col-xs-2
       = f.input :adverse_reaction, inline_label: "Yes", label: "Adverse Reaction?", as: :radio_buttons
       %a{"data-toggle" => "modal", "data-target" => "#adverse-event-modal"} Adverse Event Report
+    .col-xs-2
+      %p NOTE: An adverse reaction is any unintended physical response to a product - this includes, but is not limited to stomach ache, dizziness, itching, increased heart rate, diarrhea, headache, or nausea.
 
   .row
     %hr

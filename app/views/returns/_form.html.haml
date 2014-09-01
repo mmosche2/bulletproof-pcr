@@ -1,20 +1,24 @@
 = simple_form_for(@return, html: {class: 'form-horizontal', id: 'return_form', role: 'form' }) do |f|
   .row
     %hr
-    .col-xs-3
-      = f.input :originating_date, as: :string, input_html: { class: "date-picker col-xs-8",
+    .col-xs-2
+      = f.input :originating_date, as: :string, input_html: { class: "date-picker",
                                                            value: default_return_date }
-    .col-xs-3
-      = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "col-xs-8" }
-    .col-xs-3
-      = f.input :order_number, input_html: { class: "col-xs-6" }
-    .col-xs-3
+    .col-xs-2
+      = f.association :user, as: :select, include_blank: false, label: "Agent", collection: User.all, input_html: { class: "" }
+    .col-xs-2
+      = f.input :order_number, input_html: { class: "" }
+    .col-xs-2
+      = f.input :return_type, collection: Return::TYPES
+    .col-xs-2
       - if @return.complaint
         %p.bold Complaint
         =link_to "#{@return.complaint.pc_number}", edit_complaint_path(@return.complaint)
         = f.input :complaint_id, as: :hidden, :input_html => { :value => @return.complaint.id }
       - else
         = f.input :complaint_id, label: "PC#", hint: "Start the Return from a Complaint Report to populate this field."
+    .col-xs-2
+      = f.input :status, collection: Return::STATUSES, include_blank: false, input_html: { class: "" }
 
   .row
     %hr
@@ -49,8 +53,6 @@
           = render 'faulty_product_fields', product_form: product_form
       = link_to_add_fields "Add Another Faulty Product", f, :faulty_products
 
-  .row#signatures
-    = render 'signatures'
 
   .row
     %hr

@@ -12,27 +12,13 @@ class Return < ActiveRecord::Base
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :faulty_products, allow_destroy: true
 
+  STATUSES = ["open", "pdf", "closed"]
+  TYPES = ["Customer complaint", "Return to sender", "Warehouse"]
+  CONDITIONS = ["good", "bad"]
 
   def ra_number
     year = Time.now.strftime("%Y")
     return "#{year}-#{"%03d" % id}-R"
-  end
-
-  def status
-    if !product_condition_entered?
-      status = "Pending Warehouse"
-    elsif !discard_qc_approval
-      status = "Pending QC Approval to Discard"
-    elsif !discard_management_approval
-      status = "Pending Management Approval to Discard"
-    elsif !discard_completed
-      status = "Pending Discard"
-    elsif !discard_witnessed
-      status = "Pending Discard Witness"
-    else
-      status = "Closed."
-    end
-    return status
   end
 
   def product_condition_entered?

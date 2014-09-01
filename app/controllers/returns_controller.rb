@@ -71,6 +71,7 @@ class ReturnsController < ApplicationController
 
     def return_params
       params.require(:return).permit(:originating_date, :order_number, :user_id, :customer_id, :complaint_id,
+                      :return_type, :status,
                       customer_attributes: [:id, :name, :email, :phone, :address, :city, :state, :zip],
                       faulty_products_attributes: [:id, :product_id, :quantity, :size_count, :lot, :expiration,
                                             :returned, :reason_for_return, :credit_amount,

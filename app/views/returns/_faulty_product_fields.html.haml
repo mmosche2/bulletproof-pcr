@@ -6,7 +6,9 @@
   %td= product_form.input :reason_for_return, label: false
   %td= product_form.input :credit_amount, label: false
   %td= product_form.input :credit_issued_date, as: :string, input_html: { class: "date-picker", value: format_date(product_form.object.credit_issued_date) }, label: false
-  %td= product_form.input :condition, label: false
+  %td
+    = product_form.input :condition, label: false, collection: Return::CONDITIONS, input_html: { class: "" }
+    %p.condition-instruction
   %td
     = product_form.hidden_field :_destroy
     = link_to "remove", '#', class: "col-xs-offset-2 remove_fields"

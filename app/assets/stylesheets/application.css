@@ -37,3 +37,14 @@ a {
 }
 .hidden{ display: none; }
 .bold{ font-weight: 900; }
+.nopadding { margin: 0; padding: 0;}
+
+.condition-instruction {
+  color: red;
+  margin: 0px;
+  padding: 0px;
+  font-size: 12px;
+  line-height: 12px;
+}
+
+
