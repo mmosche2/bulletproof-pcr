@@ -8,11 +8,11 @@ class Complaint < ActiveRecord::Base
   accepts_nested_attributes_for :customer
   accepts_nested_attributes_for :faulty_products, allow_destroy: true
 
-  STATUSES = ["open", "closed"]
+  STATUSES = ["open", "pdf", "closed"]
 
   def pc_number
-    year = Time.now.strftime("%y")
-    return "#{year}-#{id}-PC"
+    year = Time.now.strftime("%Y")
+    return "#{year}-#{"%03d" % id}-PC"
   end
 
 end

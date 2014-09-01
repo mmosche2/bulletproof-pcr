@@ -14,8 +14,8 @@ class Return < ActiveRecord::Base
 
 
   def ra_number
-    year = Time.now.strftime("%y")
-    return "#{year}-#{id}-R"
+    year = Time.now.strftime("%Y")
+    return "#{year}-#{"%03d" % id}-R"
   end
 
   def status
