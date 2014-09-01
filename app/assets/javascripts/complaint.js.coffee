@@ -19,6 +19,15 @@ productObserver = ->
     product_name = $(this).find(':selected').text()
     updateSKU(product_name, element_to_update)
 
+updateAdverseReactionMessageInImmediateResponse = ->
+  if $('#complaint_adverse_reaction_false').is(':checked')
+    $("#complaint_immediate_response").html(NAR_MESSAGE)
+  else if $('#complaint_adverse_reaction_true').is(':checked')
+    $("#complaint_immediate_response").html(AR_MESSAGE)
+
+adverseReactionObserver = ->
+  $('.complaint_adverse_reaction').on 'change', 'input.radio_buttons', (event) ->
+    updateAdverseReactionMessageInImmediateResponse()
 
 ready = ->
   setupDatePicker()
@@ -44,5 +53,21 @@ ready = ->
     product_name = $(this).find(':selected').text()
     updateSKU(product_name, element_to_update)
 
+  adverseReactionObserver()
+  updateAdverseReactionMessageInImmediateResponse()
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
+
+
+
+
+AR_MESSAGE = "Thank you for your inquiry regarding Upgraded. At this time, we suggest that you discontinue the use of this product and any other Bulletproof products that you feel may be contributing to your reaction. If your condition persists, we recommend that you consult with your health care provider. As a service to our customers, Bulletproof will gladly exchange the product for another item or provide you with a refund of the full purchase price of the product.
+\n\n
+We have initiated an investigation to address your concern. This investigation will consist of a review of the appropriate documentation and a review of samples of the product. If you have not done so already, please send any remaining product as well as any unused samples of the same product to Bulletproof to aid in our investigation. We appreciate your patience in this matter, and we assure you that we will provide you with a response.
+\n\n
+If you have any additional concerns, you may contact Bulletproof Customer Service by messaging us at:support@upgradedself.com at any time. Our customer service representatives will gladly assist you.
+Bulletproof is committed to offering high-quality and effective products to our consumers. We thank you for notifying us, and we will continue to make every effort to provide you and others with these superior products. On the label there should also be a 6 digit lot number printed next to the barcode, could you send me this number as well please?
+\n\n
+Bulletproof Support"
+NAR_MESSAGE = "Thank you for your inquiry regarding Upgraded. Bulletproof is committed to offering high-quality and effective products to our consumers. We thank you for notifying us, and we will continue to make every effort to provide you and others with these superior products. As a service to our customers, Bulletproof will gladly exchange the product for another item or provide you with a refund of the full purchase price of the product. On the label there should also be a 6 digit lot number printed next to the barcode, could you send me this number as well please?"
