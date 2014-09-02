@@ -1,29 +1,6 @@
 / = wicked_pdf_stylesheet_link_tag "gift_card_print"
 / = wicked_pdf_javascript_include_tag "giftcard"
 
-/ .container
-/   .row
-/     .col-xs-12
-/       %h2 Complaint Details
-/       - for attribute in @complaint.attributes.keys
-/         %p
-/           %b= "#{attribute.humanize}: "
-/           = @complaint.attributes[attribute].to_s
-
-/       - if @complaint.adverse_event
-/         %h2 Adverse Event Details
-/         - for attribute in @complaint.adverse_event.attributes.keys
-/           %p
-/             %b= "#{attribute.humanize}: "
-/             = @complaint.adverse_event.attributes[attribute].to_s
-
-/         %h2 Contact Attempt Details
-/         - @complaint.adverse_event.contact_attempts.each do |attempt|
-/           - for attribute in attempt.attributes.keys
-/             %p
-/               %b= "#{attribute.humanize}: "
-/               = attempt.attributes[attribute].to_s
-
 .container
   %h1= "#{@complaint.pc_number}"
   - if @complaint.return.present?
