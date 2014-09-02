@@ -20,7 +20,7 @@ class Complaint < ActiveRecord::Base
   private
 
   def send_adverse_reaction_email
-    UserMailer.notify_of_adverse_reaction(self.id)
+    UserMailer.notify_of_adverse_reaction(self.id).deliver
   end
 
 end

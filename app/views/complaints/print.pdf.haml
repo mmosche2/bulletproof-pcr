@@ -8,7 +8,7 @@
   %hr
   %p
     %b Date Received:
-    = @complaint.received_date.strftime("%B %d, %Y")
+    = @complaint.received_date.strftime("%B %d, %Y") if @complaint.received_date.present?
   %p
     %b Agent:
     = name_or_email(@complaint.user)
@@ -47,7 +47,7 @@
         %td= faulty_product.quantity_reported
         %td= faulty_product.size_count
         %td= faulty_product.lot
-        %td= faulty_product.expiration.strftime("%B %d, %Y")
+        %td= faulty_product.expiration.strftime("%B %d, %Y") if faulty_product.expiration.present?
 
 
   %hr

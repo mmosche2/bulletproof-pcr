@@ -1,4 +1,5 @@
-$ ->
+
+notifyAERObserver = ->
   $("#agents-section").on "click", ".toggle-notify-aer", () ->
     elementToUpdate = $(this).parent().find(".should-notify")
     $.ajax '/account/AER_email',
@@ -13,3 +14,8 @@ $ ->
         else
           elementToUpdate.html("")
 
+ready = ->
+  notifyAERObserver()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

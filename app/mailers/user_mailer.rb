@@ -4,6 +4,7 @@ class UserMailer < ActionMailer::Base
     recipients = User.where(notify_for_aer: true).pluck(:email)
     @complaint = Complaint.find(complaint_id)
     mail(to:     recipients,
+        from:    "alert@bulletproof-pcr.com",
         subject: "New Adverse Reaction Report")
   end
 
