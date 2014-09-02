@@ -42,14 +42,6 @@ processStatus = ->
     status = $('#complaint_status').find(':selected').text()
     if status == "pdf"
       window.open('print.pdf')
-      # $.ajax '/product/get_skus',
-      #   type: 'GET'
-      #   dataType: 'json'
-      #   data: { product_name: product_name }
-      #   error: (data) ->
-      #     alert 'Could not process your request. Please try again later.'
-      #   success: (data) ->
-      #     element_to_update.html(data.sku)
 
 
 ready = ->

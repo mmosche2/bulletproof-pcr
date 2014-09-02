@@ -8,6 +8,7 @@ BulletproofPcr::Application.routes.draw do
   get '/product/get_skus' => 'products#get_skus'
   post '/return/sign_approval' => 'returns#sign_approval'
   get '/complaints/:complaint_id/print' => 'complaints#print', as: 'complaint_print'
+  get '/returns/:return_id/print' => 'returns#print', as: 'return_print'
 
   resources :complaints
   resources :returns

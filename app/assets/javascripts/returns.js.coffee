@@ -37,6 +37,16 @@ selectCondition = (condition) ->
   updateConditionAlert()
 
 
+returnStatusObserver = ->
+  $('.return_status').on 'change', 'select', (event) ->
+    processReturnStatus()
+
+processReturnStatus = ->
+  if confirm("Download PDF of this Return?")
+    status = $('#return_status').find(':selected').text()
+    if status == "pdf"
+      window.open('print.pdf')
+
 
 ready = ->
   returnTypeObserver()
@@ -50,6 +60,8 @@ ready = ->
     returnID = $('#ra-number').text()
     approval = event.target.id
     signAndDate(returnID, approval)
+
+  returnStatusObserver()
 
 
 $(document).ready(ready)

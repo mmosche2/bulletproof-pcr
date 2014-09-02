@@ -53,6 +53,17 @@ class ReturnsController < ApplicationController
     end
   end
 
+  def print
+    @return = Return.find(params[:return_id])
+    @customer = @return.customer
+    @faulty_products = @return.faulty_products
+    respond_to do |format|
+      format.pdf do
+        render :pdf => 'print'
+      end
+    end
+  end
+
 
   private
 

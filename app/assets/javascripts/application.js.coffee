@@ -5,7 +5,8 @@
 //= require turbolinks
 //= require_tree .
 
-$ ->
+
+sectionHeaderObserver = ->
   $('body').on "click", ".section-header", () ->
     $(this).parent().find(".section-content").slideToggle(200)
     sign = $(this).find(".toggle-sign")
@@ -14,5 +15,11 @@ $ ->
     else
       sign.text('-')
 
+ready = ->
+  sectionHeaderObserver()
+
   $(".section-header").each ->
     $(this).click()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)

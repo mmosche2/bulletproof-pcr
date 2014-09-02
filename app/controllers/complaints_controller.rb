@@ -44,6 +44,10 @@ class ComplaintsController < ApplicationController
 
   def print
     @complaint = Complaint.find(params[:complaint_id])
+    @customer = @complaint.customer
+    @faulty_products = @complaint.faulty_products
+    @adverse_event = @complaint.adverse_event
+    @contact_attempts = @adverse_event.contact_attempts if @adverse_event
     respond_to do |format|
       format.pdf do
         render :pdf => 'print'

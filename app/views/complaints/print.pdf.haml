@@ -1,26 +1,195 @@
-= content_for :title, "Thank You"
 / = wicked_pdf_stylesheet_link_tag "gift_card_print"
 / = wicked_pdf_javascript_include_tag "giftcard"
 
+/ .container
+/   .row
+/     .col-xs-12
+/       %h2 Complaint Details
+/       - for attribute in @complaint.attributes.keys
+/         %p
+/           %b= "#{attribute.humanize}: "
+/           = @complaint.attributes[attribute].to_s
+
+/       - if @complaint.adverse_event
+/         %h2 Adverse Event Details
+/         - for attribute in @complaint.adverse_event.attributes.keys
+/           %p
+/             %b= "#{attribute.humanize}: "
+/             = @complaint.adverse_event.attributes[attribute].to_s
+
+/         %h2 Contact Attempt Details
+/         - @complaint.adverse_event.contact_attempts.each do |attempt|
+/           - for attribute in attempt.attributes.keys
+/             %p
+/               %b= "#{attribute.humanize}: "
+/               = attempt.attributes[attribute].to_s
+
 .container
-  .row
-    .col-xs-12
-      %h2 Complaint Details
-      - for attribute in @complaint.attributes.keys
-        %p
-          %b= "#{attribute.humanize}: "
-          = @complaint.attributes[attribute].to_s
+  %h1= "#{@complaint.pc_number}"
+  - if @complaint.return.present?
+    = "RA#: #{@complaint.return.ra_number}"
+  %hr
+  %p
+    %b Date Received:
+    = @complaint.received_date.strftime("%B %d, %Y")
+  %p
+    %b Agent:
+    = name_or_email(@complaint.user)
+  %p
+    %b Status:
+    = @complaint.status
+  %p
+    %b Adverse Reaction?
+    = @complaint.adverse_reaction ? "Yes" : "No"
 
-      - if @complaint.adverse_event
-        %h2 Adverse Event Details
-        - for attribute in @complaint.adverse_event.attributes.keys
-          %p
-            %b= "#{attribute.humanize}: "
-            = @complaint.adverse_event.attributes[attribute].to_s
 
-        %h2 Contact Attempt Details
-        - @complaint.adverse_event.contact_attempts.each do |attempt|
-          - for attribute in attempt.attributes.keys
-            %p
-              %b= "#{attribute.humanize}: "
-              = attempt.attributes[attribute].to_s
+  - if @customer.present?
+    %hr
+    %h2 Customer Information
+    %p= @customer.name
+    %p= @customer.email
+    %p= @customer.phone
+    %p= @customer.address
+    %p= "#{@customer.city}, #{@customer.state} #{@customer.zip}"
+
+
+  %hr
+  %h2 Product Details
+  %table.table
+    %tr
+      %th Product
+      %th UPC code/SKU
+      %th Quantity reported (bottles/bags)
+      %th Size type (oz or count)
+      %th Lot
+      %th Expiration
+    - @faulty_products.each do |faulty_product|
+      %tr{style: "text-align: center;"}
+        %td= faulty_product.product.name
+        %td= faulty_product.product.sku
+        %td= faulty_product.quantity_reported
+        %td= faulty_product.size_count
+        %td= faulty_product.lot
+        %td= faulty_product.expiration.strftime("%B %d, %Y")
+
+
+  %hr
+  %h2 Complaint Details
+  %p
+    %b Order Number:
+    = @complaint.order_number
+  %p
+    %b Refunded?
+    = @complaint.is_refunded ? "Yes" : "No"
+  %p
+    %b Refund Amount:
+    = @complaint.refund_amount
+  %p
+    %b Returned?
+    = @complaint.is_returned ? "Yes" : "No"
+  %p
+    %b Return Quantity:
+    = @complaint.return_quantity
+  %p
+    %b Immediate Response
+    %br
+    = @complaint.immediate_response
+  %p
+    %b Summary
+    %br
+    = @complaint.summary
+  %p
+    %b Correspondence History
+    %br
+    = @complaint.correspondence_history
+
+  - if @adverse_event.present?
+    %hr
+    %h2 Adverse Event Details
+    .row
+      %p
+        %b Date Originated:
+        = @adverse_event.origination_date.strftime("%B %d, %Y") if @adverse_event.origination_date
+      %p
+        %b Agent:
+        = name_or_email(@adverse_event.user)
+      %p
+        %b Date of event:
+        = @adverse_event.date_of_event.strftime("%B %d, %Y") if @adverse_event.date_of_event
+      %p
+        %b Age at Time of Event:
+        = @adverse_event.age
+      %p
+        %b Weight (lbs):
+        = @adverse_event.weight
+      %p
+        %b Gender:
+        = @adverse_event.gender
+      %p
+        %b Description of event/problem and duration
+        %br
+        = @adverse_event.event_description
+      %p
+        %b How are you feeling right now?
+        %br
+        = @adverse_event.customer_feeling
+      %p
+        %b Hospitalization required?
+        = @adverse_event.hospitalized ? "Yes" : "No"
+      %p
+        %b Name of attending health professional:
+        = @adverse_event.attending_health_professional
+      %p
+        %b Hospital name, city, state
+        %br
+        = @adverse_event.hospital_location
+      %p
+        %b Relevant Tests/Laboratory Data, including dates
+        %br
+        = @adverse_event.relevant_tests
+      %p
+        %b Other Relevant History
+        %br
+        = @adverse_event.other_relevant_history
+      %p
+        %b Frequency:
+        = @adverse_event.frequency
+      %p
+        %b Usage:
+        = @adverse_event.usage
+      %p
+        %b Timing:
+        = @adverse_event.timing
+      %p
+        %b Dates therapy started/stopped:
+        = @adverse_event.therapy_dates
+      %p
+        %b Event abated after use stopped or dose reduced?
+        = @adverse_event.abated_after_use_stopped ? "Yes" : "No"
+      %p
+        %b Event reappeared after reintroduction?
+        = @adverse_event.reappeared_after_reintroduced ? "Yes" : "No"
+      %p
+        %b Previous usage history
+        %br
+        = @adverse_event.previous_usage_history
+      %p
+        %b Why was the customer using this product?
+        %br
+        = @adverse_event.customer_usage_reason
+      %p
+        %b Concomitant medical products, dietary supplements, and therapies
+        %br
+        = @adverse_event.other_therapies
+
+
+  - if @contact_attempts.present?
+    %hr
+    %h2 Contact Attempts
+    - @contact_attempts.each_with_index do |attempt, index|
+      %p
+        %b= "Attempt ##{index+1} - "
+        = "#{attempt.created_at.strftime("%B %d, %Y at %I:%M%P")} by #{name_or_email(attempt.user)}"
+      %p= attempt.note
+
+

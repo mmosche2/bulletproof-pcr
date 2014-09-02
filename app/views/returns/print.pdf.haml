@@ -1,0 +1,60 @@
+.container
+  %h1= "#{@return.ra_number}"
+  - if @return.complaint.present?
+    = "PC#: #{@return.complaint.pc_number}"
+  %hr
+  %p
+    %b Date Originated:
+    = @return.originating_date.strftime("%B %d, %Y") if @return.originating_date.present?
+  %p
+    %b Agent:
+    = name_or_email(@return.user)
+  %p
+    %b Status:
+    = @return.status
+  %p
+    %b Order Number:
+    = @return.order_number
+  %p
+    %b Return Type:
+    = @return.return_type
+
+
+  - if @customer.present?
+    %hr
+    %h2 Customer Information
+    %p= @customer.name
+    %p= @customer.email
+    %p= @customer.phone
+    %p= @customer.address
+    %p= "#{@customer.city}, #{@customer.state} #{@customer.zip}"
+
+
+  %hr
+  %h2 Product Details
+  %table.table
+    %tr
+      %th Product
+      %th UPC code/SKU
+      %th Lot
+      %th Quantity Reported
+      %th Quantity Received
+      %th Reason for Return
+      %th Credit Amount
+      %th Credit issued date
+      %th Condition
+    - @faulty_products.each do |faulty_product|
+      %tr{style: "text-align: center;"}
+        %td= faulty_product.product.name
+        %td= faulty_product.product.sku
+        %td= faulty_product.lot
+        %td= faulty_product.quantity_reported
+        %td= faulty_product.quantity_received
+        %td= faulty_product.reason_for_return
+        %td= faulty_product.credit_amount
+        %td= faulty_product.credit_issued_date.strftime("%B %d, %Y") if faulty_product.credit_issued_date.present?
+        %td= faulty_product.condition
+
+
+
+
