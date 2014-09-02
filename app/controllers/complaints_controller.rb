@@ -42,6 +42,15 @@ class ComplaintsController < ApplicationController
     @complaints = Complaint.all
   end
 
+  def print
+    @complaint = Complaint.find(params[:complaint_id])
+    respond_to do |format|
+      format.pdf do
+        render :pdf => 'print'
+      end
+    end
+  end
+
 
   private
 

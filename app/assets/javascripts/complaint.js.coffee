@@ -3,6 +3,12 @@ setupDatePicker = ->
     dateFormat: "MM dd, yy"
 
 
+productObserver = ->
+  $('#product-details').on 'change', 'td.product select', (event) ->
+    element_to_update = $(this).closest('tr').find('td.sku')
+    product_name = $(this).find(':selected').text()
+    updateSKU(product_name, element_to_update)
+
 updateSKU = (product_name, element_to_update) ->
   $.ajax '/product/get_skus',
     type: 'GET'
@@ -13,11 +19,10 @@ updateSKU = (product_name, element_to_update) ->
     success: (data) ->
       element_to_update.html(data.sku)
 
-productObserver = ->
-  $('#product-details').on 'change', 'td.product select', (event) ->
-    element_to_update = $(this).closest('tr').find('td.sku')
-    product_name = $(this).find(':selected').text()
-    updateSKU(product_name, element_to_update)
+
+adverseReactionObserver = ->
+  $('.complaint_adverse_reaction').on 'change', 'input.radio_buttons', (event) ->
+    updateAdverseReactionMessageInImmediateResponse()
 
 updateAdverseReactionMessageInImmediateResponse = ->
   if $('#complaint_adverse_reaction_false').is(':checked')
@@ -27,9 +32,25 @@ updateAdverseReactionMessageInImmediateResponse = ->
     $("#complaint_immediate_response").html(AR_MESSAGE)
     $("#adverse-event-form").show()
 
-adverseReactionObserver = ->
-  $('.complaint_adverse_reaction').on 'change', 'input.radio_buttons', (event) ->
-    updateAdverseReactionMessageInImmediateResponse()
+
+statusObserver = ->
+  $('.complaint_status').on 'change', 'select', (event) ->
+    processStatus()
+
+processStatus = ->
+  if confirm("Download PDF of this PC?")
+    status = $('#complaint_status').find(':selected').text()
+    if status == "pdf"
+      window.open('print.pdf')
+      # $.ajax '/product/get_skus',
+      #   type: 'GET'
+      #   dataType: 'json'
+      #   data: { product_name: product_name }
+      #   error: (data) ->
+      #     alert 'Could not process your request. Please try again later.'
+      #   success: (data) ->
+      #     element_to_update.html(data.sku)
+
 
 ready = ->
   setupDatePicker()
@@ -57,6 +78,8 @@ ready = ->
 
   adverseReactionObserver()
   updateAdverseReactionMessageInImmediateResponse()
+
+  statusObserver()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
