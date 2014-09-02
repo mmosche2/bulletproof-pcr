@@ -2,6 +2,7 @@ BulletproofPcr::Application.routes.draw do
 
   devise_for :users
   get 'welcome/index'
+  post '/account/AER_email' => 'welcome#update_notify_for_AER_for_agent'
   get '/dashboard' => 'welcome#dashboard', as: 'dashboard'
   get '/account' => 'welcome#account', as: 'account'
   get '/product/get_skus' => 'products#get_skus'

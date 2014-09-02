@@ -16,6 +16,19 @@ class WelcomeController < ApplicationController
     @products = Product.all
   end
 
+  def update_notify_for_AER_for_agent
+    user = User.find(params[:user_id])
+    if user.notify_for_aer?
+      user.notify_for_aer = false
+    else
+      user.notify_for_aer = true
+    end
+    user.save
+    respond_to do |format|
+      format.js { render json: {notify_bool: user.notify_for_aer} }
+    end
+  end
+
   private
 
     def auth_user
