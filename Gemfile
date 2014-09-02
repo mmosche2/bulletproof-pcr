@@ -21,6 +21,9 @@ gem 'turbolinks'
 
 gem 'jbuilder', '~> 1.2'
 
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
 group :doc do
   gem 'sdoc', require: false
 end
