@@ -33,7 +33,7 @@ class Return < ActiveRecord::Base
       joins(:customer).where("lower(returns.status) LIKE :search
           OR lower(customers.email) LIKE :search
           OR lower(customers.name) LIKE :search
-          OR CAST(returns.id AS TEXT) LIKE :search", {:search => "%#{search}%"})
+          OR CAST(returns.id AS TEXT) LIKE :search", {:search => "%#{search.downcase}%"})
     else
       scoped
     end
