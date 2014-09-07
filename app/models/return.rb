@@ -30,8 +30,9 @@ class Return < ActiveRecord::Base
 
   def self.search(search)
     if search.present?
-      joins(:customer).where("returns.status LIKE :search
-          OR customers.email LIKE :search
+      joins(:customer).where("lower(returns.status) LIKE :search
+          OR lower(customers.email) LIKE :search
+          OR lower(customers.name) LIKE :search
           OR CAST(returns.id AS TEXT) LIKE :search", {:search => "%#{search}%"})
     else
       scoped
