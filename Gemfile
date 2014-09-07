@@ -16,6 +16,7 @@ gem "haml-rails"
 gem 'devise'
 gem 'simple_form'
 gem 'money-rails'
+gem 'will_paginate', '~> 3.0.5'
 
 gem 'turbolinks'
 

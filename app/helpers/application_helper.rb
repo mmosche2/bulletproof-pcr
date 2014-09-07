@@ -22,5 +22,20 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
+  def complaint_sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = (column == complaint_sort_column) ? "current #{complaint_sort_direction}" : nil
+    direction = (column == complaint_sort_column && complaint_sort_direction == "asc") ? "desc" : "asc"
+    link_to title, params.merge(:complaint_sort => column, :complaint_direction => direction, :complaint_page => nil), {:class => css_class}
+  end
+
+  def return_sortable(column, title = nil)
+    title ||= column.titleize
+    css_class = (column == return_sort_column) ? "current #{return_sort_direction}" : nil
+    direction = (column == return_sort_column && return_sort_direction == "asc") ? "desc" : "asc"
+    link_to title, params.merge(:return_sort => column, :return_direction => direction, :return_page => nil), {:class => css_class}
+  end
+
+
 
 end

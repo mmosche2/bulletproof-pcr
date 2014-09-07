@@ -1,15 +1,17 @@
-
+= hidden_field_tag :return_direction, params[:return_direction]
+= hidden_field_tag :return_sort, params[:return_sort]
 .row
   .col-xs-12
     %table.table
       %tr
-        %th RA #
-        %th Customer
-        %th Status
-        %th Actions
+        %th= return_sortable "id", "RA #"
+        %th= return_sortable "customer_id", "Customer"
+        %th= return_sortable "status"
+        %th
       - @returns.each do |record|
         %tr
           %td= record.ra_number
           %td= record.customer.email if record.customer
           %td= record.status
           %td= link_to "view", edit_return_path(record)
+    = will_paginate @returns, :param_name => 'return_page'

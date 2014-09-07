@@ -2,17 +2,29 @@
   .row
     .col-xs-10.col-xs-offset-1.text-center
       %h1 Dashboard
-
-  #complaints-section
+  #search-form
     .row
       .col-xs-12
-        %h3 Complaints
-        = link_to "+ new complaint", new_complaint_path, class: "btn btn-default"
-    = render 'complaints/complaints_log'
+        = form_tag dashboard_path, :method => 'get', :id => "dashboard_search" do
+          .row
+            .col-xs-10.col-xs-offset-1
+              %p
+                = text_field_tag :search, params[:search]
+                = submit_tag "Search", :name => nil, class: "btn btn-default"
 
-  #returns-section
-    .row
-      .col-xs-12
-        %h3 Returns
-        = link_to "+ new return", new_return_path, class: "btn btn-default"
-    = render 'returns/return_log'
+          #complaints-section
+            .row
+              .col-xs-12
+                %h3 Complaints
+                = link_to "+ new complaint", new_complaint_path, class: "btn btn-default"
+            #complaints-log-partial
+              = render 'complaints/complaints_log'
+
+
+          #returns-section
+            .row
+              .col-xs-12
+                %h3 Returns
+                = link_to "+ new return", new_return_path, class: "btn btn-default"
+            #returns-log-partial
+              = render 'returns/return_log'

@@ -28,4 +28,14 @@ class Return < ActiveRecord::Base
     return true
   end
 
+  def self.search(search)
+    if search.present?
+      joins(:customer).where("returns.status LIKE :search
+          OR customers.email LIKE :search
+          OR CAST(returns.id AS TEXT) LIKE :search", {:search => "%#{search}%"})
+    else
+      scoped
+    end
+  end
+
 end

@@ -17,6 +17,19 @@ class Complaint < ActiveRecord::Base
     return "#{year}-#{"%03d" % id}-PC"
   end
 
+  def self.search(search)
+    if search.present?
+      year = Time.now.strftime("%Y")
+      joins(:customer).where("complaints.summary LIKE :search
+            OR complaints.status LIKE :search
+            OR customers.email LIKE :search
+            OR CAST(complaints.id AS TEXT) LIKE :search",
+            {:search => "%#{search}%"})
+    else
+      scoped
+    end
+  end
+
   private
 
   def send_adverse_reaction_email

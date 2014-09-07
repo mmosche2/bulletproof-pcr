@@ -1,15 +1,16 @@
-
+= hidden_field_tag :complaint_direction, params[:complaint_direction]
+= hidden_field_tag :complaint_sort, params[:complaint_sort]
 .row
   .col-xs-12
     %table.table
       %tr
-        %th PC #
-        %th Date Received
-        %th Customer
-        %th Adverse?
-        %th Summary
-        %th Status
-        %th Actions
+        %th= complaint_sortable "id", "PC #"
+        %th= complaint_sortable "received_date", "Date Received"
+        %th= complaint_sortable "customer_id", "Customer"
+        %th= complaint_sortable "adverse_reaction", "Adverse?"
+        %th= complaint_sortable "summary"
+        %th= complaint_sortable "status"
+        %th
       - @complaints.each do |complaint|
         %tr
           %td= complaint.pc_number
@@ -19,3 +20,4 @@
           %td= complaint.summary
           %td= complaint.status
           %td= link_to "view", edit_complaint_path(complaint)
+    = will_paginate @complaints, :param_name => 'complaint_page'

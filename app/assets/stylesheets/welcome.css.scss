@@ -26,3 +26,30 @@ form#new_user.new_user {
 .toggle-notify-aer {
   right: 50px;
 }
+
+#complaints-section th .current, #returns-section th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+#complaints-section th .asc, #returns-section th .asc {
+  background-image: url(up_arrow.gif);
+}
+
+#complaints-section th .desc, #returns-section th .desc {
+  background-image: url(down_arrow.gif);
+}
+
+#dashboard_search {
+  #search {
+    margin-top: 20px;
+    font-size: 18px;
+    height: 34px;
+    width: 75%;
+    margin-left: 10%;
+  }
+  input[type=submit] {
+    height: 34px;
+    margin-top: -4px;
+  }
+}

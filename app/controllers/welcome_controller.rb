@@ -1,13 +1,14 @@
 class WelcomeController < ApplicationController
   before_action :auth_user, except: [:index]
+  helper_method :complaint_sort_column, :complaint_sort_direction, :return_sort_column, :return_sort_direction
 
   def index
     redirect_to dashboard_path if user_signed_in?
   end
 
   def dashboard
-    @complaints = Complaint.all
-    @returns = Return.all
+    @complaints = Complaint.search(params[:search]).order(complaint_sort_column + ' ' + complaint_sort_direction).paginate(:per_page => 10, :page => params[:complaint_page])
+    @returns = Return.search(params[:search]).order(return_sort_column + ' ' + return_sort_direction).paginate(:per_page => 10, :page => params[:return_page])
   end
 
   def account
@@ -31,8 +32,24 @@ class WelcomeController < ApplicationController
 
   private
 
-    def auth_user
-      redirect_to root_url if !user_signed_in?
-    end
+  def complaint_sort_column
+    Complaint.column_names.include?(params[:complaint_sort]) ? params[:complaint_sort] : "id"
+  end
+
+  def complaint_sort_direction
+    %w[asc desc].include?(params[:complaint_direction]) ? params[:complaint_direction] : "desc"
+  end
+
+  def return_sort_column
+    Return.column_names.include?(params[:return_sort]) ? params[:return_sort] : "id"
+  end
+
+  def return_sort_direction
+    %w[asc desc].include?(params[:return_direction]) ? params[:return_direction] : "desc"
+  end
+
+  def auth_user
+    redirect_to root_url if !user_signed_in?
+  end
 
 end
