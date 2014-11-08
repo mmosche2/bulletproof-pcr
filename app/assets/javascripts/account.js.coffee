@@ -12,7 +12,7 @@ notifyAERObserver = ->
         if data.notify_bool == true
           elementToUpdate.html("YES")
         else
-          elementToUpdate.html("")
+          elementToUpdate.html("no")
 
 ready = ->
   notifyAERObserver()

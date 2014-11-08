@@ -23,11 +23,9 @@ returnTypeObserver = ->
 
 updateCondition = ->
   type = $('.return_return_type select').find(':selected').text()
-  if type == "Customer complaint"
+  if type == "CC: Customer complaint" || type == "CRDS: Customer Return Dietary Supplement"
     selectCondition("bad")
-  else if type == "Return to sender"
-    $('.condition-instruction').text("select GOOD if product is sealed and not damaged. Otherwise select BAD.")
-  else if type == "Warehouse"
+  else if type == "RS: Return to sender" || type == "WS: Warehouse" || type == "CRF: Customer Return Food"
     $('.condition-instruction').text("select GOOD if product is sealed and not damaged. Otherwise select BAD.")
 
 selectCondition = (condition) ->
