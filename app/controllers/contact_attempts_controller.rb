@@ -4,7 +4,11 @@ class ContactAttemptsController < ApplicationController
   def create
     @contact_attempt = ContactAttempt.new(contact_attempt_params)
     if @contact_attempt.save
-      redirect_to edit_complaint_path(@contact_attempt.adverse_event.complaint)
+      if @contact_attempt.adverse_event
+        redirect_to edit_complaint_path(@contact_attempt.adverse_event.complaint)
+      else
+        redirect_to root_path
+      end
     else
       render "new"
     end
@@ -14,7 +18,11 @@ class ContactAttemptsController < ApplicationController
     @contact_attempt = ContactAttempt.find(params[:id])
 
     if @contact_attempt.update(contact_attempt_params)
-      redirect_to edit_complaint_path(@contact_attempt.adverse_event.complaint)
+      if @contact_attempt.adverse_event
+        redirect_to edit_complaint_path(@contact_attempt.adverse_event.complaint)
+      else
+        redirect_to root_path
+      end
     else
       render 'edit'
     end

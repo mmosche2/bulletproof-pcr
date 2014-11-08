@@ -12,13 +12,14 @@
                 = text_field_tag :search, params[:search]
                 = submit_tag "Search", :name => nil, class: "btn btn-default"
 
-          #complaints-section
-            .row
-              .col-xs-12
-                %h3 Complaints
-                = link_to "+ new complaint", new_complaint_path, class: "btn btn-default"
-            #complaints-log-partial
-              = render 'complaints/complaints_log'
+          - if !current_user.warehouse?
+            #complaints-section
+              .row
+                .col-xs-12
+                  %h3 Complaints
+                  = link_to "+ new complaint", new_complaint_path, class: "btn btn-default"
+              #complaints-log-partial
+                = render 'complaints/complaints_log'
 
 
           #returns-section

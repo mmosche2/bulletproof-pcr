@@ -10,4 +10,8 @@ class User < ActiveRecord::Base
     "#{email}"
   end
 
+  def warehouse?
+  	return role == "Warehouse"
+  end
+
 end

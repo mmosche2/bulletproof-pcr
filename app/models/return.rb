@@ -13,7 +13,7 @@ class Return < ActiveRecord::Base
   accepts_nested_attributes_for :faulty_products, allow_destroy: true
 
   STATUSES = ["open", "pdf", "closed"]
-  TYPES = ["Customer complaint", "Return to sender", "Warehouse"]
+  TYPES = ["CC: Customer complaint", "RS: Return to sender", "WS: Warehouse", "CRDS: Customer Return Dietary Supplement", "CRF: Customer Return Food"]
   CONDITIONS = ["good", "bad"]
 
   def ra_number

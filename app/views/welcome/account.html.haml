@@ -35,21 +35,30 @@
         #agents-section.tab-pane
           .row
             .col-xs-12
+              = link_to "Create New Account", new_users_admin_path, class: "btn btn-primary"
+              %br
+              %br
+          .row
+            .col-xs-12
               %table.table
                 %tr
                   %th Name
                   %th Email
                   %th Role
                   %th AER Email?
+                  %th Actions
                 - @agents.each do |agent|
                   %tr
                     %td= agent.name
                     %td= agent.email
                     %td= agent.role
                     %td
-                      %span.should-notify= "YES" if agent.notify_for_aer?
-                      = link_to "toggle", "javascript:void(0)", class: "toggle-notify-aer"
+                      %span.should-notify= agent.notify_for_aer? ? "YES" : "no"
+                      = link_to "toggle", "javascript:void(0)", class: "btn btn-default toggle-notify-aer"
                       %span.hidden.agent-id= agent.id
+                    %td
+                      = link_to "Edit", edit_users_admin_path(agent)
+                      = link_to "Delete", users_admin_path(agent), :data => { :confirm => "Are you sure?" }, :method => :delete
 
 
 

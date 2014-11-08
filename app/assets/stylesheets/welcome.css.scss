@@ -26,6 +26,10 @@ form#new_user.new_user {
 .toggle-notify-aer {
   right: 50px;
 }
+.btn.btn-default.toggle-notify-aer {
+  font-size: 10px;
+  padding: 5px;
+}
 
 #complaints-section th .current, #returns-section th .current {
   padding-right: 12px;
