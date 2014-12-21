@@ -33,7 +33,7 @@ class WelcomeController < ApplicationController
   private
 
   def complaint_sort_column
-    Complaint.column_names.include?(params[:complaint_sort]) ? params[:complaint_sort] : "id"
+    Complaint.column_names.include?(params[:complaint_sort]) ? params[:complaint_sort] : "pc_number"
   end
 
   def complaint_sort_direction
@@ -41,7 +41,7 @@ class WelcomeController < ApplicationController
   end
 
   def return_sort_column
-    Return.column_names.include?(params[:return_sort]) ? params[:return_sort] : "id"
+    Return.column_names.include?(params[:return_sort]) ? params[:return_sort] : "ra_number"
   end
 
   def return_sort_direction
