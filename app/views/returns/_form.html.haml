@@ -1,6 +1,9 @@
 = simple_form_for(@return, html: {class: 'form-horizontal', id: 'return_form', role: 'form' }) do |f|
   .row
     %hr
+      .col-xs-2
+        = f.input :ra_number, label: "RA Number (ex: 2014-001-R)"
+  .row
     .col-xs-2
       = f.input :originating_date, as: :string, input_html: { class: "date-picker",
                                                            value: default_return_date }

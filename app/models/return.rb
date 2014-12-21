@@ -16,10 +16,6 @@ class Return < ActiveRecord::Base
   TYPES = ["CC: Customer complaint", "RS: Return to sender", "WS: Warehouse", "CRDS: Customer Return Dietary Supplement", "CRF: Customer Return Food"]
   CONDITIONS = ["good", "bad"]
 
-  def ra_number
-    year = Time.now.strftime("%Y")
-    return "#{year}-#{"%03d" % id}-R"
-  end
 
   def product_condition_entered?
     faulty_products.each do |faulty_product|
@@ -31,6 +27,7 @@ class Return < ActiveRecord::Base
   def self.search(search)
     if search.present?
       joins(:customer).where("lower(returns.status) LIKE :search
+          OR lower(returns.ra_number) LIKE :search
           OR lower(customers.email) LIKE :search
           OR lower(customers.name) LIKE :search
           OR CAST(returns.id AS TEXT) LIKE :search", {:search => "%#{search.downcase}%"})

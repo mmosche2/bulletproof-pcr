@@ -12,16 +12,13 @@ class Complaint < ActiveRecord::Base
 
   STATUSES = ["open", "pdf", "closed"]
 
-  def pc_number
-    year = Time.now.strftime("%Y")
-    return "#{year}-#{"%03d" % id}-PC"
-  end
 
   def self.search(search)
     if search.present?
       year = Time.now.strftime("%Y")
       joins(:customer).where("lower(complaints.summary) LIKE :search
             OR lower(complaints.status) LIKE :search
+            OR lower(complaints.pc_number) LIKE :search
             OR lower(customers.email) LIKE :search
             OR lower(customers.name) LIKE :search
             OR CAST(complaints.id AS TEXT) LIKE :search",
