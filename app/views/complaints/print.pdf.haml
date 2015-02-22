@@ -68,17 +68,25 @@
     %b Return Quantity:
     = @complaint.return_quantity
   %p
+    %b Tracking Link:
+    = @complaint.tracking_link
+  %p
     %b Immediate Response
     %br
-    = @complaint.immediate_response
+    = simple_format(@complaint.immediate_response)
   %p
     %b Summary
     %br
-    = @complaint.summary
+    = simple_format(@complaint.summary)
   %p
     %b Correspondence History
     %br
-    = @complaint.correspondence_history
+    = simple_format(@complaint.correspondence_history)
+  %p
+    %b Image Uploads
+    %br
+    - @complaint.complaint_images.each do |image_obj|
+      %p= wicked_pdf_image_tag_for_public image_obj.image.url(:thumb)
 
   - if @adverse_event.present?
     %hr
@@ -105,7 +113,7 @@
       %p
         %b Description of event/problem and duration
         %br
-        = @adverse_event.event_description
+        = simple_format(@adverse_event.event_description)
       %p
         %b How are you feeling right now?
         %br
@@ -167,6 +175,6 @@
       %p
         %b= "Attempt ##{index+1} - "
         = "#{attempt.created_at.strftime("%B %d, %Y at %I:%M%P")} by #{name_or_email(attempt.user)}"
-      %p= attempt.note
+      %p= simple_format(attempt.note)
 
 

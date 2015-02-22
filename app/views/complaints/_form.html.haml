@@ -71,9 +71,24 @@
         = f.input :refund_amount, label: "... if yes, how much?", input_html: { class: "col-xs-1" }
         = f.input :is_returned, label: "Agent will document product being returned?", as: :radio_buttons
         = f.input :return_quantity, label: "... if yes, what's the total quantity?", input_html: { class: "col-xs-1" }
+        = f.input :tracking_link, label: "Tracking Link (include http:// for link below to work)", input_html: { class: "col-xs-3" }
+        - if @complaint.tracking_link
+          %p
+            Link: 
+            %a{href:"#{@complaint.tracking_link}", target:"_blank"}= @complaint.tracking_link
         = f.input :immediate_response, input_html: { class: "col-xs-10", :rows => 10}
         = f.input :summary, label: "Complaint Summary (short)", input_html: { class: "col-xs-10" }
         = f.input :correspondence_history, input_html: { class: "col-xs-10", :rows => 15 }
+
+        %b Image Uploads
+        = f.fields_for :complaint_images do |image_form|
+          - if image_form.object.new_record?
+            %p Upload a new photo: 
+            = image_form.file_field(:image)
+          - else
+            %p= image_tag(image_form.object.image.url(:thumb))
+        =# link_to_add_fields "Add Another Image", f, :complaint_images
+
 
   .row
     %br

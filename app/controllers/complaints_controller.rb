@@ -5,6 +5,7 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.new
     @complaint.build_customer
     @complaint.faulty_products.build
+    @complaint.complaint_images.build
   end
 
   def create
@@ -29,6 +30,7 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.find(params[:id])
     @complaint.build_customer if @complaint.customer.nil?
     @complaint.faulty_products.build if @complaint.faulty_products.empty?
+    @complaint.complaint_images.build
   end
 
   def show
@@ -59,7 +61,7 @@ class ComplaintsController < ApplicationController
   private
 
     def complaint_params
-      params.require(:complaint).permit(:received_date, :user_id, :pc_number, :customer_id, :status, :order_number, :is_returned, :is_refunded, :refund_amount, :return_quantity, :immediate_response, :adverse_reaction, :summary, :correspondence_history, customer_attributes: [:id, :name, :email, :phone, :address, :city, :state, :zip], faulty_products_attributes: [:id, :product_id, :quantity_reported, :size_count, :lot, :expiration, :_destroy])
+      params.require(:complaint).permit(:received_date, :user_id, :pc_number, :customer_id, :status, :order_number, :is_returned, :is_refunded, :refund_amount, :return_quantity, :tracking_link, :immediate_response, :adverse_reaction, :summary, :correspondence_history, customer_attributes: [:id, :name, :email, :phone, :address, :city, :state, :zip], faulty_products_attributes: [:id, :product_id, :quantity_reported, :size_count, :lot, :expiration, :_destroy], complaint_images_attributes: [:id, :image])
     end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141221172950) do
+ActiveRecord::Schema.define(version: 20150222174759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20141221172950) do
   add_index "adverse_events", ["complaint_id"], name: "index_adverse_events_on_complaint_id", using: :btree
   add_index "adverse_events", ["user_id"], name: "index_adverse_events_on_user_id", using: :btree
 
+  create_table "complaint_images", force: true do |t|
+    t.integer  "complaint_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "complaints", force: true do |t|
     t.datetime "received_date"
     t.integer  "user_id"
@@ -64,6 +74,7 @@ ActiveRecord::Schema.define(version: 20141221172950) do
     t.decimal  "refund_amount"
     t.integer  "return_quantity"
     t.string   "pc_number"
+    t.string   "tracking_link"
   end
 
   add_index "complaints", ["customer_id"], name: "index_complaints_on_customer_id", using: :btree
@@ -128,6 +139,7 @@ ActiveRecord::Schema.define(version: 20141221172950) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "deleted_at"
   end
 
   create_table "returns", force: true do |t|

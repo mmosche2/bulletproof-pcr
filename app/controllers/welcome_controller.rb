@@ -14,7 +14,7 @@ class WelcomeController < ApplicationController
   def account
     @agents = User.all
     @product = Product.new
-    @products = Product.all
+    @products = Product.all.order("name asc")
   end
 
   def update_notify_for_AER_for_agent

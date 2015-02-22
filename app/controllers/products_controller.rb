@@ -10,6 +10,25 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find(params[:id])
+  end
+
+  def update
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to account_path
+    else
+      render "edit"
+    end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to account_path
+  end
+
   # AJAX only - updates skus when product select is changed
   def get_skus
     product = Product.find_by(name: params[:product_name])

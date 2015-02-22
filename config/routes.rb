@@ -11,11 +11,13 @@ BulletproofPcr::Application.routes.draw do
   get '/returns/:return_id/print' => 'returns#print', as: 'return_print'
   resources :users_admin, controller: 'users'
 
-  resources :complaints
+  resources :complaints do
+    resources :complaint_images
+  end
   resources :returns
   resources :adverse_events, only: [:create, :update, :destroy]
   resources :contact_attempts, only: [:create, :update, :destroy, :edit]
-  resources :products, only: [:create, :destroy]
+  resources :products
 
   devise_scope :user do
     delete '/logout' => 'devise/sessions#destroy'

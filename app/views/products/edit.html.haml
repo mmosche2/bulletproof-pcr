@@ -1,0 +1,8 @@
+= simple_form_for(@product, html: {class: 'form-horizontal', role: 'form' }) do |f|
+  .row
+    .col-md-3
+      = f.input :sku
+    .col-md-3
+      = f.input :name
+    .col-md-3
+      = f.submit "Update Product", class: "btn btn-primary"

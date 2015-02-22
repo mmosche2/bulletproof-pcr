@@ -24,6 +24,12 @@ gem 'jbuilder', '~> 1.2'
 
 gem 'wicked_pdf'
 
+# don't delete stuff
+gem "permanent_records", "~> 3.1.6"
+
+# uploads
+gem "paperclip", "~> 4.2"
+
 group :doc do
   gem 'sdoc', require: false
 end
