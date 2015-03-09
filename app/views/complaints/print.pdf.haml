@@ -86,7 +86,7 @@
     %b Image Uploads
     %br
     - @complaint.complaint_images.each do |image_obj|
-      %p= wicked_pdf_image_tag_for_public image_obj.image.url(:thumb)
+      %p= wicked_pdf_image_tag_for_public image_obj.image.url
 
   - if @adverse_event.present?
     %hr

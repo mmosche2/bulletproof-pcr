@@ -1,4 +1,4 @@
-= simple_form_for(@complaint, html: {class: 'form-horizontal', id: 'complaint_form', role: 'form' }) do |f|
+= simple_form_for(@complaint, html: {class: 'form-horizontal', id: 'complaint_form', role: 'form', :multipart => true }) do |f|
   .row
     .col-xs-12
       - if @complaint.return.present?
@@ -83,11 +83,12 @@
         %b Image Uploads
         = f.fields_for :complaint_images do |image_form|
           - if image_form.object.new_record?
-            %p Upload a new photo: 
-            = image_form.file_field(:image)
+            %p 
+              Upload a new photo: 
+              = image_form.file_field(:image)
           - else
-            %p= image_tag(image_form.object.image.url(:thumb))
-        =# link_to_add_fields "Add Another Image", f, :complaint_images
+            %a{href: image_form.object.image.url, target: '_blank'}
+              %p= image_form.object.image.url
 
 
   .row

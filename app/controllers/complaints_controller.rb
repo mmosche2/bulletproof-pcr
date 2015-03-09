@@ -5,7 +5,7 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.new
     @complaint.build_customer
     @complaint.faulty_products.build
-    @complaint.complaint_images.build
+    3.times {|i| @complaint.complaint_images.build }
   end
 
   def create
@@ -30,7 +30,7 @@ class ComplaintsController < ApplicationController
     @complaint = Complaint.find(params[:id])
     @complaint.build_customer if @complaint.customer.nil?
     @complaint.faulty_products.build if @complaint.faulty_products.empty?
-    @complaint.complaint_images.build
+    3.times {|i| @complaint.complaint_images.build }
   end
 
   def show
