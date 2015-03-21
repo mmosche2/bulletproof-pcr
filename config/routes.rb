@@ -9,6 +9,7 @@ BulletproofPcr::Application.routes.draw do
   post '/return/sign_approval' => 'returns#sign_approval'
   get '/complaints/:complaint_id/print' => 'complaints#print', as: 'complaint_print'
   get '/returns/:return_id/print' => 'returns#print', as: 'return_print'
+  delete '/complaints/:complaint_id/remove_image/:complaint_image_id' => 'complaints#remove_image', as: 'complaint_remove_image'
   resources :users_admin, controller: 'users'
 
   resources :complaints do

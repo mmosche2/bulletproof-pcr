@@ -57,6 +57,14 @@ class ComplaintsController < ApplicationController
     end
   end
 
+  def remove_image
+    @complaint = Complaint.find(params[:complaint_id])
+    @complaint_image = @complaint.complaint_images.find(params[:complaint_image_id])
+    @complaint_image.image.destroy
+    @complaint_image.destroy
+    redirect_to edit_complaint_path(@complaint)
+  end
+
 
   private
 
