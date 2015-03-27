@@ -29,6 +29,7 @@ gem "permanent_records", "~> 3.1.6"
 
 # uploads
 gem "paperclip", "~> 4.2"
+gem 'aws-sdk', '~> 1.5.7'
 
 group :doc do
   gem 'sdoc', require: false

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150222174759) do
+ActiveRecord::Schema.define(version: 20150327041507) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20150222174759) do
     t.integer  "return_quantity"
     t.string   "pc_number"
     t.string   "tracking_link"
+    t.datetime "deleted_at"
   end
 
   add_index "complaints", ["customer_id"], name: "index_complaints_on_customer_id", using: :btree
@@ -162,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150222174759) do
     t.string   "status"
     t.string   "return_type"
     t.string   "ra_number"
+    t.datetime "deleted_at"
   end
 
   add_index "returns", ["complaint_id"], name: "index_returns_on_complaint_id", using: :btree

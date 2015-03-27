@@ -16,6 +16,12 @@ class Return < ActiveRecord::Base
   TYPES = ["CC: Customer complaint", "RS: Return to sender", "WS: Warehouse", "CRDS: Customer Return Dietary Supplement", "CRF: Customer Return Food"]
   CONDITIONS = ["good", "bad"]
 
+  default_scope where(:deleted_at => nil)
+
+  def self.deleted
+    self.unscoped.where('deleted_at IS NOT NULL')
+  end
+
 
   def product_condition_entered?
     faulty_products.each do |faulty_product|

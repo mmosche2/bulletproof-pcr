@@ -87,7 +87,7 @@
               Upload a new photo: 
               = image_form.file_field(:image)
           - else
-            %a{href: image_form.object.image.path, target: '_blank', class: "paperclip-image-link"}
+            %a{href: image_form.object.image.url, target: '_blank', class: "paperclip-image-link"}
               %p= image_form.object.image.url
             = link_to "Remove", complaint_remove_image_path(@complaint, image_form.object), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "remove-paperclip-image"
             %hr

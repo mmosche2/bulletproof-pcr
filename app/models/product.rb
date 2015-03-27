@@ -4,7 +4,7 @@ class Product < ActiveRecord::Base
   default_scope where(:deleted_at => nil)
 
   def self.deleted
-	  self.unscoped.where('deleted_at IS NOT NULL')
-	end
+    self.unscoped.where('deleted_at IS NOT NULL')
+  end
 
 end

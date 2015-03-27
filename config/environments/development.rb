@@ -31,4 +31,16 @@ BulletproofPcr::Application.configure do
   config.assets.debug = true
 
   Paperclip.options[:command_path] = "/usr/local/bin/"
+  
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :url => ":s3_domain_url",
+    :path => "/:class/images/:id_:basename.:style.:extension",
+    :s3_credentials => {
+      :bucket => "bulletproof-pcr-development",
+      :access_key_id => "AKIAI7OGUR2KHXSCFTQQ",
+      :secret_access_key => "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"
+    }
+  }
+
 end

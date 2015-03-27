@@ -38,6 +38,9 @@ class ComplaintsController < ApplicationController
   end
 
   def destroy
+    @complaint = Complaint.find(params[:id])
+    @complaint.destroy
+    redirect_to dashboard_path
   end
 
   def index

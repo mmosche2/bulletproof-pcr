@@ -33,6 +33,8 @@ class ReturnsController < ApplicationController
   end
 
   def destroy
+    @return.destroy
+    redirect_to dashboard_path
   end
 
   def index

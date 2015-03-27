@@ -13,5 +13,8 @@
           %td= record.ra_number
           %td= record.customer.email if record.customer
           %td= record.status
-          %td= link_to "view", edit_return_path(record)
+          %td
+            = link_to "view", edit_return_path(record)
+            |
+            = link_to "delete", return_path(record), :data => { :confirm => "Are you sure?" }, :method => :delete
     = will_paginate @returns, :param_name => 'return_page'

@@ -14,6 +14,12 @@ class Complaint < ActiveRecord::Base
 
   STATUSES = ["open", "pdf", "closed"]
 
+  default_scope where(:deleted_at => nil)
+
+  def self.deleted
+    self.unscoped.where('deleted_at IS NOT NULL')
+  end
+
 
   def self.search(search)
     if search.present?
